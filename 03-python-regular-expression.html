@@ -1,0 +1,1347 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>03 Python Regular Expression | Contents</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.6.7">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    
+    <link rel="prev" href="./02-python3-core-programming.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book"
+        data-level="3"
+        data-chapter-title="03 Python Regular Expression"
+        data-filepath="03-python-regular-expression.md"
+        data-basepath="."
+        data-revision="Fri Jul 27 2018 16:50:10 GMT+0800 (中国标准时间)"
+        data-innerlanguage="">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="./index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        Introduction
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="01-introduce-regular-expression.html">
+            
+                
+                    <a href="./01-introduce-regular-expression.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        01 Introduce Regular Expression
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="02-python3-core-programming.html">
+            
+                
+                    <a href="./02-python3-core-programming.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        02 Python 3 Core Programming
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="3" data-path="03-python-regular-expression.html">
+            
+                
+                    <a href="./03-python-regular-expression.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        03 Python Regular Expression
+                    </a>
+            
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="./" >Contents</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="python&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;">Python&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;</h1>
+<p>&#x5B98;&#x65B9;&#x6587;&#x6863;&#xFF1A;<a href="https://docs.python.org/3/library/re.html?highlight=re#module-re" target="_blank">re</a></p>
+<p></p><h1 id="contents">Contents<span class="tocSkip"></span></h1><p></p>
+<div class="toc"><ul class="toc-item"><li><span><a href="#re&#x6A21;&#x5757;" data-toc-modified-id="re&#x6A21;&#x5757;-1"><span class="toc-item-num">1&#xA0;&#xA0;</span>re&#x6A21;&#x5757;</a></span></li><li><span><a href="#re&#x5E38;&#x7528;&#x51FD;&#x6570;" data-toc-modified-id="re&#x5E38;&#x7528;&#x51FD;&#x6570;-2"><span class="toc-item-num">2&#xA0;&#xA0;</span>re&#x5E38;&#x7528;&#x51FD;&#x6570;</a></span><ul class="toc-item"><li><span><a href="#&#x4F7F;&#x7528;-match()&#x65B9;&#x6CD5;&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;" data-toc-modified-id="&#x4F7F;&#x7528;-match()&#x65B9;&#x6CD5;&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;-2.1"><span class="toc-item-num">2.1&#xA0;&#xA0;</span>&#x4F7F;&#x7528; match()&#x65B9;&#x6CD5;&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;</a></span></li><li><span><a href="#&#x4F7F;&#x7528;search()&#x5728;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x67E5;&#x627E;&#x6A21;&#x5F0F;&#xFF08;&#x641C;&#x7D22;&#x4E0E;&#x5339;&#x914D;&#x7684;&#x5BF9;&#x6BD4;&#xFF09;" data-toc-modified-id="&#x4F7F;&#x7528;search()&#x5728;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x67E5;&#x627E;&#x6A21;&#x5F0F;&#xFF08;&#x641C;&#x7D22;&#x4E0E;&#x5339;&#x914D;&#x7684;&#x5BF9;&#x6BD4;&#xFF09;-2.2"><span class="toc-item-num">2.2&#xA0;&#xA0;</span>&#x4F7F;&#x7528;search()&#x5728;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x67E5;&#x627E;&#x6A21;&#x5F0F;&#xFF08;&#x641C;&#x7D22;&#x4E0E;&#x5339;&#x914D;&#x7684;&#x5BF9;&#x6BD4;&#xFF09;</a></span></li><li><span><a href="#&#x5339;&#x914D;&#x591A;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF08;|&#xFF09;" data-toc-modified-id="&#x5339;&#x914D;&#x591A;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF08;|&#xFF09;-2.3"><span class="toc-item-num">2.3&#xA0;&#xA0;</span>&#x5339;&#x914D;&#x591A;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF08;|&#xFF09;</a></span></li><li><span><a href="#&#x5339;&#x914D;&#x4EFB;&#x4F55;&#x5355;&#x4E2A;&#x5B57;&#x7B26;" data-toc-modified-id="&#x5339;&#x914D;&#x4EFB;&#x4F55;&#x5355;&#x4E2A;&#x5B57;&#x7B26;-2.4"><span class="toc-item-num">2.4&#xA0;&#xA0;</span>&#x5339;&#x914D;&#x4EFB;&#x4F55;&#x5355;&#x4E2A;&#x5B57;&#x7B26;</a></span></li><li><span><a href="#&#x521B;&#x5EFA;&#x5B57;&#x7B26;&#x96C6;([-])" data-toc-modified-id="&#x521B;&#x5EFA;&#x5B57;&#x7B26;&#x96C6;([-])-2.5"><span class="toc-item-num">2.5&#xA0;&#xA0;</span>&#x521B;&#x5EFA;&#x5B57;&#x7B26;&#x96C6;([ ])</a></span></li><li><span><a href="#&#x91CD;&#x590D;&#x3001;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x4EE5;&#x53CA;&#x5206;&#x7EC4;" data-toc-modified-id="&#x91CD;&#x590D;&#x3001;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x4EE5;&#x53CA;&#x5206;&#x7EC4;-2.6"><span class="toc-item-num">2.6&#xA0;&#xA0;</span>&#x91CD;&#x590D;&#x3001;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x4EE5;&#x53CA;&#x5206;&#x7EC4;</a></span></li><li><span><a href="#&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x8D77;&#x59CB;&#x548C;&#x7ED3;&#x5C3E;&#x4EE5;&#x53CA;&#x5355;&#x8BCD;&#x8FB9;&#x754C;" data-toc-modified-id="&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x8D77;&#x59CB;&#x548C;&#x7ED3;&#x5C3E;&#x4EE5;&#x53CA;&#x5355;&#x8BCD;&#x8FB9;&#x754C;-2.7"><span class="toc-item-num">2.7&#xA0;&#xA0;</span>&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x8D77;&#x59CB;&#x548C;&#x7ED3;&#x5C3E;&#x4EE5;&#x53CA;&#x5355;&#x8BCD;&#x8FB9;&#x754C;</a></span></li><li><span><a href="#&#x4F7F;&#x7528;-findall()&#x548C;-finditer()&#x67E5;&#x627E;&#x6BCF;&#x4E00;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x4F4D;&#x7F6E;" data-toc-modified-id="&#x4F7F;&#x7528;-findall()&#x548C;-finditer()&#x67E5;&#x627E;&#x6BCF;&#x4E00;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x4F4D;&#x7F6E;-2.8"><span class="toc-item-num">2.8&#xA0;&#xA0;</span>&#x4F7F;&#x7528; findall()&#x548C; finditer()&#x67E5;&#x627E;&#x6BCF;&#x4E00;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x4F4D;&#x7F6E;</a></span></li><li><span><a href="#&#x4F7F;&#x7528;-sub()&#x548C;-subn()&#x641C;&#x7D22;&#x4E0E;&#x66FF;&#x6362;" data-toc-modified-id="&#x4F7F;&#x7528;-sub()&#x548C;-subn()&#x641C;&#x7D22;&#x4E0E;&#x66FF;&#x6362;-2.9"><span class="toc-item-num">2.9&#xA0;&#xA0;</span>&#x4F7F;&#x7528; sub()&#x548C; subn()&#x641C;&#x7D22;&#x4E0E;&#x66FF;&#x6362;</a></span></li><li><span><a href="#&#x5728;&#x9650;&#x5B9A;&#x6A21;&#x5F0F;&#x4E0A;&#x4F7F;&#x7528;-split()&#x5206;&#x9694;&#x5B57;&#x7B26;&#x4E32;" data-toc-modified-id="&#x5728;&#x9650;&#x5B9A;&#x6A21;&#x5F0F;&#x4E0A;&#x4F7F;&#x7528;-split()&#x5206;&#x9694;&#x5B57;&#x7B26;&#x4E32;-2.10"><span class="toc-item-num">2.10&#xA0;&#xA0;</span>&#x5728;&#x9650;&#x5B9A;&#x6A21;&#x5F0F;&#x4E0A;&#x4F7F;&#x7528; split()&#x5206;&#x9694;&#x5B57;&#x7B26;&#x4E32;</a></span></li><li><span><a href="#&#x6269;&#x5C55;&#x7B26;&#x53F7;" data-toc-modified-id="&#x6269;&#x5C55;&#x7B26;&#x53F7;-2.11"><span class="toc-item-num">2.11&#xA0;&#xA0;</span>&#x6269;&#x5C55;&#x7B26;&#x53F7;</a></span></li></ul></li><li><span><a href="#&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x793A;&#x4F8B;" data-toc-modified-id="&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x793A;&#x4F8B;-3"><span class="toc-item-num">3&#xA0;&#xA0;</span>&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x793A;&#x4F8B;</a></span><ul class="toc-item"><li><span><a href="#&#x590D;&#x4E60;jupyter&#x9B54;&#x6CD5;" data-toc-modified-id="&#x590D;&#x4E60;jupyter&#x9B54;&#x6CD5;-3.1"><span class="toc-item-num">3.1&#xA0;&#xA0;</span>&#x590D;&#x4E60;jupyter&#x9B54;&#x6CD5;</a></span></li><li><span><a href="#&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x793A;&#x4F8B;" data-toc-modified-id="&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x793A;&#x4F8B;-3.2"><span class="toc-item-num">3.2&#xA0;&#xA0;</span>&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x793A;&#x4F8B;</a></span><ul class="toc-item"><li><span><a href="#&#x5206;&#x5272;-POSIX-&#x7684;-who-&#x547D;&#x4EE4;&#x8F93;&#x51FA;&#xFF08;whodate.py)" data-toc-modified-id="&#x5206;&#x5272;-POSIX-&#x7684;-who-&#x547D;&#x4EE4;&#x8F93;&#x51FA;&#xFF08;whodate.py)-3.2.1"><span class="toc-item-num">3.2.1&#xA0;&#xA0;</span>&#x5206;&#x5272; POSIX &#x7684; who &#x547D;&#x4EE4;&#x8F93;&#x51FA;&#xFF08;whodate.py)</a></span></li><li><span><a href="#&#x5B9E;&#x6218;&#x793A;&#x4F8B;" data-toc-modified-id="&#x5B9E;&#x6218;&#x793A;&#x4F8B;-3.2.2"><span class="toc-item-num">3.2.2&#xA0;&#xA0;</span>&#x5B9E;&#x6218;&#x793A;&#x4F8B;</a></span></li></ul></li><li><span><a href="#&#x641C;&#x7D22;&#x3001;&#x5339;&#x914D;&#x548C;&#x8D2A;&#x5A6A;" data-toc-modified-id="&#x641C;&#x7D22;&#x3001;&#x5339;&#x914D;&#x548C;&#x8D2A;&#x5A6A;-3.3"><span class="toc-item-num">3.3&#xA0;&#xA0;</span>&#x641C;&#x7D22;&#x3001;&#x5339;&#x914D;&#x548C;&#x8D2A;&#x5A6A;</a></span></li></ul></li></ul></div>
+
+<h2 id="re&#x6A21;&#x5757;">re&#x6A21;&#x5757;</h2>
+<p><img src="https://raw.githubusercontent.com/ds19991999/githubimg/master/picgo/20180716112011.png" alt=""></p>
+<p>&#x2460; Python 1.5.2 &#x7248;&#x4E2D;&#x65B0;&#x589E;&#xFF1B;2.4 &#x7248;&#x4E2D;&#x589E;&#x52A0; flags &#x53C2;&#x6570;</p>
+<p>&#x2461; Python 2.2 &#x7248;&#x4E2D;&#x65B0;&#x589E;&#xFF1B;2.4 &#x7248;&#x4E2D;&#x589E;&#x52A0; flags &#x53C2;&#x6570;</p>
+<p>&#x2462; Python 2.7 &#x548C; 3.1 &#x7248;&#x4E2D;&#x589E;&#x52A0; flags &#x53C2;&#x6570;</p>
+<p>&#x4E3B;&#x8981;&#x5B66;&#x4E60;match()&#x548C; search()&#xFF0C;&#x4EE5;&#x53CA; compile()&#x51FD;&#x6570;</p>
+<h2 id="re&#x5E38;&#x7528;&#x51FD;&#x6570;">re&#x5E38;&#x7528;&#x51FD;&#x6570;</h2>
+<h3 id="&#x4F7F;&#x7528;-match&#x65B9;&#x6CD5;&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;">&#x4F7F;&#x7528; match()&#x65B9;&#x6CD5;&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;</h3>
+<p><code>match(pattern &#xFF0C; string &#xFF0C; flags=0)</code></p>
+<p>&#x5C1D;&#x8BD5;&#x4F7F;&#x7528;&#x5E26;&#x6709;&#x53EF;&#x9009;&#x7684;&#x6807;&#x8BB0;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x6A21;&#x5F0F;&#x6765;&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x5982;&#x679C;&#x5339;&#x914D;&#x6210;&#x529F;&#xFF0C;&#x5C31;&#x8FD4;&#x56DE;&#x5339;&#x914D;&#x5BF9;&#x8C61;&#xFF1B;&#x5982;&#x679C;&#x5931;&#x8D25;&#xFF0C;&#x5C31;&#x8FD4;&#x56DE; None</p>
+<p>&#x4ED6;&#x662F;&#x4ECE;&#x5B57;&#x7B26;&#x4E32;<strong>&#x8D77;&#x59CB;&#x90E8;&#x4F4D;&#x5F00;&#x59CB;&#x5339;&#x914D;</strong>,&#x4E00;&#x65E6;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x5339;&#x914D;&#x5931;&#x8D25;&#xFF0C;&#x5C31;&#x662F;&#x4E0D;&#x5339;&#x914D;</p>
+<p>&#x5339;&#x914D;&#x5BF9;&#x8C61;&#x7684; group()&#x65B9;&#x6CD5;&#x80FD;&#x591F;&#x7528;&#x4E8E;&#x663E;&#x793A;&#x90A3;&#x4E2A;&#x6210;&#x529F;&#x7684;&#x5339;&#x914D;&#x3002;</p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> re
+m = re.match(<span class="hljs-string">&apos;foo&apos;</span>,<span class="hljs-string">&apos;foo&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:
+    regex1 = m.group()
+regex1
+</code></pre>
+<pre><code>&apos;foo&apos;
+</code></pre><pre><code class="lang-python">m
+</code></pre>
+<pre><code>&lt;_sre.SRE_Match at 0x522adb0&gt;
+</code></pre><pre><code class="lang-python">m = re.match(<span class="hljs-string">&apos;foo&apos;</span>,<span class="hljs-string">&apos;bar&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:m.group()<span class="hljs-comment"># &#x5355;&#x884C;&#x7248;&#x672C;&#x7684;if&#x8BED;&#x53E5;</span>
+<span class="hljs-keyword">print</span> m  <span class="hljs-comment"># &#x4E0D;&#x5339;&#x914D;</span>
+</code></pre>
+<pre><code>None
+</code></pre><p><strong>&#x540E;&#x9762;&#x64CD;&#x4F5C;&#x7701;&#x53BB;if&#x8BED;&#x53E5;</strong>&#xFF0C;&#x5B9E;&#x9645;&#x5F00;&#x53D1;&#x8981;&#x52A0;&#x4E0A;&#xFF0C;&#x907F;&#x514D; AttributeError &#x5F02;&#x5E38;</p>
+<pre><code class="lang-python">m = re.match(<span class="hljs-string">&quot;foo&quot;</span>,<span class="hljs-string">&quot;food on the table&quot;</span>)
+m.group()
+</code></pre>
+<pre><code>&apos;foo&apos;
+</code></pre><pre><code class="lang-python">re.match(<span class="hljs-string">&quot;foo&quot;</span>,<span class="hljs-string">&quot;food on the table&quot;</span>).group()
+</code></pre>
+<pre><code>&apos;foo&apos;
+</code></pre><h3 id="&#x4F7F;&#x7528;search&#x5728;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x67E5;&#x627E;&#x6A21;&#x5F0F;&#xFF08;&#x641C;&#x7D22;&#x4E0E;&#x5339;&#x914D;&#x7684;&#x5BF9;&#x6BD4;&#xFF09;">&#x4F7F;&#x7528;search()&#x5728;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x67E5;&#x627E;&#x6A21;&#x5F0F;&#xFF08;&#x641C;&#x7D22;&#x4E0E;&#x5339;&#x914D;&#x7684;&#x5BF9;&#x6BD4;&#xFF09;</h3>
+<p><code>search(pattern &#xFF0C; string &#xFF0C; flags=0)</code></p>
+<p>&#x4F7F;&#x7528;&#x53EF;&#x9009;&#x6807;&#x8BB0;&#x641C;&#x7D22;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;<strong>&#x7B2C;&#x4E00;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x6A21;&#x5F0F;</strong>&#x3002;&#x5982;&#x679C;&#x5339;&#x914D;&#x6210;&#x529F;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x5339;&#x914D;&#x5BF9;&#x8C61;&#xFF1B;&#x5982;&#x679C;&#x5931;&#x8D25;&#xFF0C;&#x5219;&#x8FD4;&#x56DE; None</p>
+<pre><code class="lang-python">m = re.match(<span class="hljs-string">&apos;foo&apos;</span>,<span class="hljs-string">&apos;seafood&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:<span class="hljs-keyword">print</span> m.group()<span class="hljs-comment">#&#x5339;&#x914D;&#x5931;&#x8D25;</span>
+</code></pre>
+<pre><code class="lang-python">m = re.search(<span class="hljs-string">&apos;foo&apos;</span>,<span class="hljs-string">&apos;searchfood&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:regex3 = m.group()
+<span class="hljs-keyword">print</span> regex3 <span class="hljs-comment"># &#x641C;&#x7D22;&#x6210;&#x529F;&#xFF0C;&#x4F46;&#x662F;&#x5339;&#x914D;&#x5931;&#x8D25;</span>
+</code></pre>
+<pre><code>foo
+</code></pre><h3 id="&#x5339;&#x914D;&#x591A;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF08;&#xFF09;">&#x5339;&#x914D;&#x591A;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF08;|&#xFF09;</h3>
+<pre><code class="lang-python">bt = <span class="hljs-string">&apos;bat|bet|bit&apos;</span>
+m = re.match(bt,<span class="hljs-string">&apos;bat&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:<span class="hljs-keyword">print</span> m.group() <span class="hljs-comment"># Pytho2&#x8FD9;&#x91CC;&#x4E0D;&#x52A0;print&#x5C31;&#x6253;&#x5370;&#x4E0D;&#x51FA;&#x7ED3;&#x679C;</span>
+</code></pre>
+<pre><code>bat
+</code></pre><pre><code class="lang-python">m = re.match(bt,<span class="hljs-string">&apos;blt&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:<span class="hljs-keyword">print</span> m.group() <span class="hljs-comment"># &#x5339;&#x914D;&#x5931;&#x8D25;</span>
+</code></pre>
+<pre><code class="lang-python">m = re.match(bt, <span class="hljs-string">&apos;he bit me&apos;</span>) 
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:<span class="hljs-keyword">print</span> m.group() <span class="hljs-comment"># &#x5339;&#x914D;&#x5931;&#x8D25;&#xFF1A;&#x4E0D;&#x80FD;&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;</span>
+</code></pre>
+<pre><code class="lang-python">m = re.search(bt,<span class="hljs-string">&apos;he bit me&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:<span class="hljs-keyword">print</span> m.group()
+</code></pre>
+<pre><code>bit
+</code></pre><p>&#x5230;&#x8FD9;&#x91CC;match()&#x548C;search()&#x7684;&#x533A;&#x522B;&#x57FA;&#x672C;&#x4E0A;&#x5C31;&#x6E05;&#x6670;&#x4E86;</p>
+<h3 id="&#x5339;&#x914D;&#x4EFB;&#x4F55;&#x5355;&#x4E2A;&#x5B57;&#x7B26;">&#x5339;&#x914D;&#x4EFB;&#x4F55;&#x5355;&#x4E2A;&#x5B57;&#x7B26;</h3>
+<p>&#x70B9;&#x53F7;&#xFF08;.&#xFF09;&#x4E0D;&#x80FD;&#x5339;&#x914D;&#x4E00;&#x4E2A;&#x6362;&#x884C;&#x7B26;\n &#x6216;&#x8005;&#x975E;&#x5B57;&#x7B26;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x4E00;&#x4E2A;&#x7A7A;&#x5B57;&#x7B26;&#x4E32;</p>
+<pre><code class="lang-python">anyend = <span class="hljs-string">&apos;.end&apos;</span>
+m = re.match(anyend, <span class="hljs-string">&apos;bend&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:<span class="hljs-keyword">print</span> m.group()
+</code></pre>
+<pre><code>bend
+</code></pre><pre><code class="lang-python">m = re.match(anyend, <span class="hljs-string">&apos;end&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:<span class="hljs-keyword">print</span> m.group() <span class="hljs-comment"># &#x5339;&#x914D;&#x5931;&#x8D25;</span>
+</code></pre>
+<pre><code class="lang-python">m = re.match(anyend, <span class="hljs-string">&apos;\nend&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:<span class="hljs-keyword">print</span> m.group() <span class="hljs-comment"># &#x9664;&#x4E86;\n&#x4E4B;&#x5916;&#x7684;&#x4EFB;&#x4F55;&#x5B57;&#x7B26;</span>
+</code></pre>
+<pre><code class="lang-python">m = re.search(anyend, <span class="hljs-string">&apos;The end.&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:str = m.group() <span class="hljs-comment"># &#x53EF;&#x4EE5;&#x5339;&#x914D;&apos; &apos;</span>
+str
+</code></pre>
+<pre><code>&apos; end&apos;
+</code></pre><pre><code class="lang-python">pat314 = <span class="hljs-string">&apos;3.14&apos;</span>    <span class="hljs-comment"># &#x8868;&#x793A;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x70B9;&#x53F7;</span>
+pi_pat = <span class="hljs-string">&apos;3\.14&apos;</span>   <span class="hljs-comment"># &#x8868;&#x793A;&#x5B57;&#x9762;&#x91CF;&#x7684;&#x70B9;&#x53F7; (dec. point)</span>
+m = re.match(pi_pat,<span class="hljs-string">&apos;3.14&apos;</span>)  <span class="hljs-comment">#&#x7CBE;&#x786E;&#x5339;&#x914D;</span>
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:str = m.group() 
+str
+</code></pre>
+<pre><code>&apos;3.14&apos;
+</code></pre><pre><code class="lang-python">m = re.match(pat314,<span class="hljs-string">&apos;3014&apos;</span>) <span class="hljs-comment"># &#x70B9;&#x53F7;&#x5339;&#x914D;0</span>
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:str = m.group() 
+str
+</code></pre>
+<pre><code>&apos;3014&apos;
+</code></pre><pre><code class="lang-python">m = re.match(pat314,<span class="hljs-string">&apos;3.14&apos;</span>) <span class="hljs-comment"># &#x70B9;&#x53F7;&#x5339;&#x914D;.</span>
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:str = m.group() 
+str
+</code></pre>
+<pre><code>&apos;3.14&apos;
+</code></pre><h3 id="&#x521B;&#x5EFA;&#x5B57;&#x7B26;&#x96C6;-">&#x521B;&#x5EFA;&#x5B57;&#x7B26;&#x96C6;([ ])</h3>
+<pre><code class="lang-python">m = re.match(<span class="hljs-string">&apos;[cr][23][dp][o2]&apos;</span>, <span class="hljs-string">&apos;c3po&apos;</span>)  <span class="hljs-comment"># &#x5339;&#x914D; &apos;c3po&apos;</span>
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:str = m.group()
+str
+</code></pre>
+<pre><code>&apos;c3po&apos;
+</code></pre><pre><code class="lang-python">m = re.match(<span class="hljs-string">&apos;r2d2|c3po&apos;</span>, <span class="hljs-string">&apos;r2d2&apos;</span>)<span class="hljs-comment"># &#x5339;&#x914D; &apos;r2d2&apos;</span>
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:str = m.group()
+str
+</code></pre>
+<pre><code>&apos;r2d2&apos;
+</code></pre><h3 id="&#x91CD;&#x590D;&#x3001;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x4EE5;&#x53CA;&#x5206;&#x7EC4;">&#x91CD;&#x590D;&#x3001;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x4EE5;&#x53CA;&#x5206;&#x7EC4;</h3>
+<p>&#x7B80;&#x5355;&#x7535;&#x5B50;&#x90AE;&#x4EF6;&#x5730;&#x5740;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;<code>&#xFF08;\w+@\w+\.com&#xFF09;</code>, <code>www.xxx.com</code>&#xFF0C;&#x4EC5;&#x4EC5;&#x5141;&#x8BB8; xxx.com &#x4F5C;&#x4E3A;&#x6574;&#x4E2A;&#x57DF;&#x540D;&#xFF0C;&#x5FC5;&#x987B;&#x4FEE;&#x6539;&#x73B0;&#x6709;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;.&#x4E3A;&#x4E86;&#x8868;&#x793A;&#x4E3B;&#x673A;&#x540D;&#x662F;&#x53EF;&#x9009;&#x7684;&#xFF0C;&#x5373;<code>\w+@(\w+\.)?\w+\.com</code></p>
+<pre><code class="lang-python">patt  = <span class="hljs-string">&apos;\w+@(\w+\.)?\w+\.com&apos;</span>  <span class="hljs-comment"># &#x201C;&#xFF1F;&#x201D;&#x64CD;&#x4F5C;&#x7B26;&#x6765;&#x8868;&#x793A;&#x8BE5;&#x6A21;&#x5F0F;&#x51FA;&#x73B0;&#x96F6;&#x6B21;&#x6216;&#x8005;&#x4E00;&#x6B21;</span>
+re.match(patt, <span class="hljs-string">&apos;nobody@xxx.com&apos;</span>).group()
+</code></pre>
+<pre><code>&apos;nobody@xxx.com&apos;
+</code></pre><pre><code class="lang-python"><span class="hljs-comment"># &#x5141;&#x8BB8;&#x4EFB;&#x610F;&#x6570;&#x91CF;&#x7684;&#x4E2D;&#x95F4;&#x5B50;&#x57DF;&#x540D;&#x5B58;&#x5728;</span>
+patt = <span class="hljs-string">&apos;\w+@(\w+\.)*\w+\.com&apos;</span>
+re.match(patt, <span class="hljs-string">&apos;nobody@www.xxx.yyy.zzz.com&apos;</span>).group()
+</code></pre>
+<pre><code>&apos;nobody@www.xxx.yyy.zzz.com&apos;
+</code></pre><p>&#x66F4;&#x8FDB;&#x4E00;&#x6B65;</p>
+<pre><code class="lang-python">m = re.match(<span class="hljs-string">&apos;(\w\w\w)-(\d\d\d)&apos;</span>,<span class="hljs-string">&apos;abc-123&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:str = m.group()
+str
+</code></pre>
+<pre><code>&apos;abc-123&apos;
+</code></pre><pre><code class="lang-python">m.group(<span class="hljs-number">1</span>)  <span class="hljs-comment">#&#x5B50;&#x7EC4;1</span>
+</code></pre>
+<pre><code>&apos;abc&apos;
+</code></pre><pre><code class="lang-python">m.group(<span class="hljs-number">2</span>)
+</code></pre>
+<pre><code>&apos;123&apos;
+</code></pre><pre><code class="lang-python">m.groups()
+</code></pre>
+<pre><code>(&apos;abc&apos;, &apos;123&apos;)
+</code></pre><p>&#x66F4;&#x5177;&#x4F53;&#x7684;&#x5206;&#x7EC4;&#x64CD;&#x4F5C;</p>
+<pre><code class="lang-python">m = re.match(<span class="hljs-string">&apos;ab&apos;</span>,<span class="hljs-string">&apos;ab&apos;</span>)
+m.group()
+</code></pre>
+<pre><code>&apos;ab&apos;
+</code></pre><pre><code class="lang-python">m.groups()  <span class="hljs-comment"># &#x53EA;&#x6293;&#x53D6;&#x5B50;&#x7EC4;&#x4FE1;&#x606F;</span>
+</code></pre>
+<pre><code>()
+</code></pre><pre><code class="lang-python">m = re.match(<span class="hljs-string">&apos;(ab)&apos;</span>,<span class="hljs-string">&apos;ab&apos;</span>)
+m.group()
+</code></pre>
+<pre><code>&apos;ab&apos;
+</code></pre><pre><code class="lang-python">m.group(<span class="hljs-number">1</span>)
+</code></pre>
+<pre><code>&apos;ab&apos;
+</code></pre><pre><code class="lang-python">m.groups() <span class="hljs-comment"># &#x6CE8;&#x610F;&#x5230;&#x5143;&#x7956;&#x91CC;&#x9762;&#x5982;&#x679C;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x9700;&#x8981;&#x52A0;&#x4E00;&#x4E2A;&apos;,&apos;&#x53F7;</span>
+</code></pre>
+<pre><code>(&apos;ab&apos;,)
+</code></pre><pre><code class="lang-python">m = re.match(<span class="hljs-string">&apos;(a(b))&apos;</span>, <span class="hljs-string">&apos;ab&apos;</span>) <span class="hljs-comment"># &#x4E24;&#x4E2A;&#x5B50;&#x7EC4;</span>
+m.group()
+</code></pre>
+<pre><code>&apos;ab&apos;
+</code></pre><pre><code class="lang-python">m.group(<span class="hljs-number">1</span>)
+</code></pre>
+<pre><code>&apos;ab&apos;
+</code></pre><pre><code class="lang-python">m.group(<span class="hljs-number">2</span>)
+</code></pre>
+<pre><code>&apos;b&apos;
+</code></pre><pre><code class="lang-python">m.groups()
+</code></pre>
+<pre><code>(&apos;ab&apos;, &apos;b&apos;)
+</code></pre><h3 id="&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x8D77;&#x59CB;&#x548C;&#x7ED3;&#x5C3E;&#x4EE5;&#x53CA;&#x5355;&#x8BCD;&#x8FB9;&#x754C;">&#x5339;&#x914D;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x8D77;&#x59CB;&#x548C;&#x7ED3;&#x5C3E;&#x4EE5;&#x53CA;&#x5355;&#x8BCD;&#x8FB9;&#x754C;</h3>
+<p>&#x66F4;&#x591A;&#x7528;&#x4E8E;&#x8868;&#x793A;&#x641C;&#x7D22;&#x800C;&#x4E0D;&#x662F;&#x5339;&#x914D;</p>
+<pre><code class="lang-python">m = re.search(<span class="hljs-string">&apos;The&apos;</span>,<span class="hljs-string">&apos;The end.&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>: <span class="hljs-keyword">print</span> m.group()
+</code></pre>
+<pre><code>The
+</code></pre><pre><code class="lang-python">m = re.search(<span class="hljs-string">&apos;^The&apos;</span>,<span class="hljs-string">&apos;end. The&apos;</span>)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>:<span class="hljs-keyword">print</span> m.group()
+</code></pre>
+<pre><code class="lang-python">m = re.search(<span class="hljs-string">r&apos;\bthe&apos;</span>,<span class="hljs-string">&apos;bite the dog&apos;</span>)<span class="hljs-comment"># &#x5728;&#x8FB9;&#x754C;</span>
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>: <span class="hljs-keyword">print</span> m.group()
+</code></pre>
+<pre><code>the
+</code></pre><pre><code class="lang-python">m = re.search(<span class="hljs-string">r&apos;\bthe&apos;</span>, <span class="hljs-string">&apos;bitethe dog&apos;</span>) <span class="hljs-comment"># &#x6709;&#x8FB9;&#x754C;</span>
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>: <span class="hljs-keyword">print</span> m.group()
+</code></pre>
+<pre><code class="lang-python">m = re.search(<span class="hljs-string">r&apos;\Bthe&apos;</span>, <span class="hljs-string">&apos;bitethe dog&apos;</span>) <span class="hljs-comment"># &#x6709;&#x8FB9;&#x754C;</span>
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>: <span class="hljs-keyword">print</span> m.group()
+</code></pre>
+<pre><code>the
+</code></pre><h3 id="&#x4F7F;&#x7528;-findall&#x548C;-finditer&#x67E5;&#x627E;&#x6BCF;&#x4E00;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x4F4D;&#x7F6E;">&#x4F7F;&#x7528; findall()&#x548C; finditer()&#x67E5;&#x627E;&#x6BCF;&#x4E00;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x4F4D;&#x7F6E;</h3>
+<pre><code>findall(pattern &#xFF0C; string [, flags] )
+</code></pre><p>&#x67E5;&#x627E;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x6240;&#x6709;&#xFF08;&#x975E;&#x91CD;&#x590D;&#xFF09;&#x51FA;&#x73B0;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x6A21;&#x5F0F;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5339;&#x914D;&#x5217;&#x8868;</p>
+<pre><code>finditer(pattern &#xFF0C; string [, flags] )
+</code></pre><p>&#x4E0E; findall()&#x51FD;&#x6570;&#x76F8;&#x540C;&#xFF0C;&#x4F46;&#x8FD4;&#x56DE;&#x7684;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#xFF0C;&#x800C;&#x662F;&#x4E00;&#x4E2A;&#x8FED;&#x4EE3;&#x5668;&#x3002;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E00;&#x6B21;&#x5339;&#x914D;&#xFF0C;&#x8FED;
+&#x4EE3;&#x5668;&#x90FD;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5339;&#x914D;&#x5BF9;&#x8C61;</p>
+<pre><code class="lang-python">re.findall(<span class="hljs-string">&apos;car&apos;</span>,<span class="hljs-string">&apos;car&apos;</span>)
+</code></pre>
+<pre><code>[&apos;car&apos;]
+</code></pre><pre><code class="lang-python">re.findall(<span class="hljs-string">&apos;car&apos;</span>,<span class="hljs-string">&apos;scary&apos;</span>)
+</code></pre>
+<pre><code>[&apos;car&apos;]
+</code></pre><pre><code class="lang-python">re.findall(<span class="hljs-string">&apos;car&apos;</span>,<span class="hljs-string">&apos;carry the barcardi to the car&apos;</span>)
+</code></pre>
+<pre><code>[&apos;car&apos;, &apos;car&apos;, &apos;car&apos;]
+</code></pre><pre><code class="lang-python">s = <span class="hljs-string">&apos;This and that.&apos;</span>
+re.findall(<span class="hljs-string">r&apos;(th\w+) and (th\w+)&apos;</span>,s,re.I)
+</code></pre>
+<pre><code>[(&apos;This&apos;, &apos;that&apos;)]
+</code></pre><pre><code class="lang-python">re.finditer(<span class="hljs-string">r&apos;(th\w+) and (th\w+)&apos;</span>, s,re.I).next().groups()
+</code></pre>
+<pre><code>(&apos;This&apos;, &apos;that&apos;)
+</code></pre><pre><code class="lang-python">re.finditer(<span class="hljs-string">r&apos;(th\w+) and (th\w+)&apos;</span>, s,re.I).next().group(<span class="hljs-number">1</span>)
+</code></pre>
+<pre><code>&apos;This&apos;
+</code></pre><pre><code class="lang-python"> [g.groups() <span class="hljs-keyword">for</span> g <span class="hljs-keyword">in</span> re.finditer(<span class="hljs-string">r&apos;(th\w+) and (th\w+)&apos;</span>,s, re.I)]
+</code></pre>
+<pre><code>[(&apos;This&apos;, &apos;that&apos;)]
+</code></pre><p>&#x591A;&#x91CD;&#x5339;&#x914D;</p>
+<pre><code class="lang-python">re.findall(<span class="hljs-string">r&apos;(th\w+)&apos;</span>, s, re.I)
+</code></pre>
+<pre><code>[&apos;This&apos;, &apos;that&apos;]
+</code></pre><pre><code class="lang-python">it = re.finditer(<span class="hljs-string">r&apos;(th\w+)&apos;</span>, s, re.I)
+g = it.next()
+g.groups()
+</code></pre>
+<pre><code>(&apos;This&apos;,)
+</code></pre><pre><code class="lang-python">g.group(<span class="hljs-number">1</span>)
+</code></pre>
+<pre><code>&apos;This&apos;
+</code></pre><pre><code class="lang-python">g = it.next()
+g.groups()
+</code></pre>
+<pre><code>(&apos;that&apos;,)
+</code></pre><pre><code class="lang-python">g.group(<span class="hljs-number">1</span>)
+</code></pre>
+<pre><code>&apos;that&apos;
+</code></pre><pre><code class="lang-python">[g.group(<span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> g <span class="hljs-keyword">in</span> re.finditer(<span class="hljs-string">r&apos;(th\w+)&apos;</span>,s,re.I)]
+</code></pre>
+<pre><code>[&apos;This&apos;, &apos;that&apos;]
+</code></pre><h3 id="&#x4F7F;&#x7528;-sub&#x548C;-subn&#x641C;&#x7D22;&#x4E0E;&#x66FF;&#x6362;">&#x4F7F;&#x7528; sub()&#x548C; subn()&#x641C;&#x7D22;&#x4E0E;&#x66FF;&#x6362;</h3>
+<p>&#x4E24;&#x8005;&#x51E0;&#x4E4E;&#x4E00;&#x6837;&#xFF0C;&#x90FD;&#x662F;&#x5C06;&#x67D0;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x6240;&#x6709;&#x5339;&#x914D;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x90E8;&#x5206;&#x8FDB;&#x884C;&#x67D0;&#x79CD;&#x5F62;&#x5F0F;&#x7684;&#x66FF;&#x6362;&#xFF0C;&#x4F46;&#x5B83;&#x4E5F;&#x53EF;&#x80FD;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x66FF;&#x6362;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;</p>
+<p>subn()&#x8FD8;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x8868;&#x793A;&#x66FF;&#x6362;&#x7684;&#x603B;&#x6570;&#xFF0C;<strong>&#x66FF;&#x6362;&#x540E;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x548C;&#x8868;&#x793A;&#x66FF;&#x6362;&#x603B;&#x6570;&#x7684;&#x6570;&#x5B57;</strong>&#x4E00;&#x8D77;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x62E5;&#x6709;&#x4E24;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x5143;&#x7EC4;&#x8FD4;&#x56DE;&#x3002;</p>
+<pre><code class="lang-python">re.sub(<span class="hljs-string">&apos;X&apos;</span>, <span class="hljs-string">&apos;Mr. Smith&apos;</span>, <span class="hljs-string">&apos;attn: X\n\nDear X,\n&apos;</span>)
+</code></pre>
+<pre><code>&apos;attn: Mr. Smith\n\nDear Mr. Smith,\n&apos;
+</code></pre><pre><code class="lang-python">re.subn(<span class="hljs-string">&apos;X&apos;</span>, <span class="hljs-string">&apos;Mr. Smith&apos;</span>, <span class="hljs-string">&apos;attn: X\n\nDear X,\n&apos;</span>)
+</code></pre>
+<pre><code>(&apos;attn: Mr. Smith\n\nDear Mr. Smith,\n&apos;, 2)
+</code></pre><pre><code class="lang-python"><span class="hljs-keyword">print</span> re.sub(<span class="hljs-string">&apos;X&apos;</span>, <span class="hljs-string">&apos;Mr. Smith&apos;</span>, <span class="hljs-string">&apos;attn: X\n\nDear X,\n&apos;</span>)
+</code></pre>
+<pre><code>attn: Mr. Smith
+
+Dear Mr. Smith,
+</code></pre><pre><code class="lang-python">re.sub(<span class="hljs-string">&apos;[ae]&apos;</span>, <span class="hljs-string">&apos;X&apos;</span>, <span class="hljs-string">&apos;abcdef&apos;</span>)
+</code></pre>
+<pre><code>&apos;XbcdXf&apos;
+</code></pre><pre><code class="lang-python">re.subn(<span class="hljs-string">&apos;[ae]&apos;</span>, <span class="hljs-string">&apos;X&apos;</span>, <span class="hljs-string">&apos;abcdef&apos;</span>)
+</code></pre>
+<pre><code>(&apos;XbcdXf&apos;, 2)
+</code></pre><p><strong>&#x53E6;&#x4E00;&#x79CD;&#x5206;&#x7EC4;&#x7F16;&#x53F7;&#xFF1A;</strong></p>
+<p>group&#xFF08;&#xFF09;&#x65B9;&#x6CD5;&#x9664;&#x4E86;&#x80FD;&#x591F;&#x53D6;&#x51FA;&#x5339;&#x914D;&#x5206;&#x7EC4;&#x7F16;&#x53F7;&#x5916;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;\N&#xFF0C;&#x5176;&#x4E2D; N &#x662F;&#x5728;&#x66FF;&#x6362;&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x5206;&#x7EC4;&#x7F16;&#x53F7;</p>
+<pre><code class="lang-python">re.sub(<span class="hljs-string">r&apos;(\d{1,2})/(\d{1,2})/(\d{2}|\d{4})&apos;</span>,<span class="hljs-string">r&apos;\2/\1/\3&apos;</span>, <span class="hljs-string">&apos;2/20/91&apos;</span>) <span class="hljs-comment"># &#x5206;&#x7EC4;&#x91CD;&#x6392;</span>
+</code></pre>
+<pre><code>&apos;20/2/91&apos;
+</code></pre><pre><code class="lang-python">re.sub(<span class="hljs-string">r&apos;(\d{1,2})/(\d{1,2})/(\d{2}|\d{4})&apos;</span>,<span class="hljs-string">r&apos;\2/\1/\3&apos;</span>, <span class="hljs-string">&apos;2/20/1991&apos;</span>)
+</code></pre>
+<pre><code>&apos;20/2/1991&apos;
+</code></pre><h3 id="&#x5728;&#x9650;&#x5B9A;&#x6A21;&#x5F0F;&#x4E0A;&#x4F7F;&#x7528;-split&#x5206;&#x9694;&#x5B57;&#x7B26;&#x4E32;">&#x5728;&#x9650;&#x5B9A;&#x6A21;&#x5F0F;&#x4E0A;&#x4F7F;&#x7528; split()&#x5206;&#x9694;&#x5B57;&#x7B26;&#x4E32;</h3>
+<pre><code class="lang-python">DATA = (
+    <span class="hljs-string">&apos;Mountain View, CA 94040&apos;</span>,
+    <span class="hljs-string">&apos;Sunnyvale, CA&apos;</span>,
+    <span class="hljs-string">&apos;Los Altos, 94023&apos;</span>,
+    <span class="hljs-string">&apos;Cupertino 95014&apos;</span>,
+    <span class="hljs-string">&apos;Palo Alto CA&apos;</span>,
+    )
+<span class="hljs-keyword">for</span> datum <span class="hljs-keyword">in</span> DATA:
+    <span class="hljs-comment"># &#x5982;&#x679C;&#x7A7A;&#x683C;&#x7D27;&#x8DDF;&#x5728;&#x4E94;&#x4E2A;&#x6570;&#x5B57;&#xFF08;ZIP &#x7F16;&#x7801;&#xFF09;&#x6216;&#x8005;&#x4E24;&#x4E2A;&#x5927;&#x5199;&#x5B57;&#x6BCD;&#xFF08;&#x7F8E;&#x56FD;&#x8054;&#x90A6;&#x5DDE;&#x7F29;</span>
+    <span class="hljs-comment"># &#x5199;&#xFF09;&#x4E4B;&#x540E;&#xFF0C;&#x5C31;&#x7528; split &#x8BED;&#x53E5;&#x5206;&#x5272;&#x8BE5;&#x7A7A;&#x683C;&#x3002;</span>
+    <span class="hljs-keyword">print</span> re.split(<span class="hljs-string">&apos;, |(?= (?:\d{5}|[A-Z]{2})) &apos;</span>, datum)
+</code></pre>
+<pre><code>[&apos;Mountain View&apos;, &apos;CA&apos;, &apos;94040&apos;]
+[&apos;Sunnyvale&apos;, &apos;CA&apos;]
+[&apos;Los Altos&apos;, &apos;94023&apos;]
+[&apos;Cupertino&apos;, &apos;95014&apos;]
+[&apos;Palo Alto&apos;, &apos;CA&apos;]
+</code></pre><h3 id="&#x6269;&#x5C55;&#x7B26;&#x53F7;">&#x6269;&#x5C55;&#x7B26;&#x53F7;</h3>
+<p><strong> i&#x4E0D;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199; </strong></p>
+<pre><code class="lang-python">re.findall(<span class="hljs-string">r&apos;(?i)yes&apos;</span>, <span class="hljs-string">&apos;yes? Yes. YES!!&apos;</span>)
+</code></pre>
+<pre><code>[&apos;yes&apos;, &apos;Yes&apos;, &apos;YES&apos;]
+</code></pre><pre><code class="lang-python">re.findall(<span class="hljs-string">r&apos;(?i)th\w+&apos;</span>, <span class="hljs-string">&apos;The quickest way is through thistunnel.&apos;</span>)
+</code></pre>
+<pre><code>[&apos;The&apos;, &apos;through&apos;, &apos;thistunnel&apos;]
+</code></pre><pre><code class="lang-python">re.findall(<span class="hljs-string">r&apos;(?im)(th[\w ]+)&apos;</span>,<span class="hljs-string">&quot;&quot;&quot;
+    This line is the first,
+    another line,
+    that line, it&apos;s the best
+    &quot;&quot;&quot;</span>)
+<span class="hljs-comment"># &#x8FD9;&#x91CC;&#x8C8C;&#x4F3C;&#x4E66;&#x7C4D;&#x7FFB;&#x8BD1;&#x9519;&#x4E86;</span>
+</code></pre>
+<pre><code>[&apos;This line is the first&apos;, &apos;ther line&apos;, &apos;that line&apos;, &apos;the best&apos;]
+</code></pre><pre><code class="lang-python">re.findall(<span class="hljs-string">r&apos;th.+&apos;</span>, <span class="hljs-string">&apos;&apos;&apos;
+    The first line
+    the second line
+    the third line
+    &apos;&apos;&apos;</span>)
+</code></pre>
+<pre><code>[&apos;the second line&apos;, &apos;the third line&apos;]
+</code></pre><p>x&#x8BE5;&#x6807;&#x8BB0;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x901A;&#x8FC7;&#x6291;&#x5236;&#x5728;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x4E2D;&#x4F7F;&#x7528;&#x7A7A;&#x767D;&#x7B26;&#xFF08;&#x9664;&#x4E86;&#x5728;&#x5B57;&#x7B26;&#x7C7B;&#x4E2D;&#x6216;&#x8005;&#x5728;&#x53CD;&#x659C;&#x7EBF;&#x8F6C;&#x4E49;&#x4E2D;&#xFF09;&#x6765;&#x521B;&#x5EFA;&#x66F4;&#x6613;&#x8BFB;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;</p>
+<pre><code class="lang-python">re.search(<span class="hljs-string">r&apos;&apos;&apos;(?x)
+    \((\d{3})\)             # &#x533A;&#x53F7;
+    [ ]                     # &#x7A7A;&#x767D;&#x7B26;
+    (\d{3})                 # &#x524D;&#x7F00;
+    -                       # &#x6A2A;&#x7EBF;
+    (\d{4})                 # &#x7EC8;&#x70B9;&#x6570;&#x5B57;
+    &apos;&apos;&apos;</span>, <span class="hljs-string">&apos;(800) 555-1212&apos;</span>).groups()
+</code></pre>
+<pre><code>(&apos;800&apos;, &apos;555&apos;, &apos;1212&apos;)
+</code></pre><p>(?:&#x2026;)&#x5BF9;&#x90E8;&#x5206;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x8FDB;&#x884C;&#x5206;&#x7EC4;&#xFF0C;&#x4F46;&#x662F;<strong>&#x5E76;&#x4E0D;&#x4F1A;&#x4FDD;&#x5B58;&#x8BE5;&#x5206;&#x7EC4;</strong>&#x7528;&#x4E8E;&#x540E;&#x7EED;&#x7684;&#x68C0;&#x7D22;&#x6216;&#x8005;&#x5E94;&#x7528;</p>
+<pre><code class="lang-python">re.findall(<span class="hljs-string">r&apos;http://(?:\w+\.)*(\w+\.com)&apos;</span>,
+           <span class="hljs-string">&apos;http://google.com http://www.google.com http://code.google.com&apos;</span>)
+</code></pre>
+<pre><code>[&apos;google.com&apos;, &apos;google.com&apos;, &apos;google.com&apos;]
+</code></pre><p><strong>&#x5BF9;&#x4E8E;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x5C3D;&#x91CF;&#x4F7F;&#x7528;&#x539F;&#x59CB;&#x5B57;&#x7B26;&#x4E32;</strong></p>
+<h2 id="&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x793A;&#x4F8B;">&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x793A;&#x4F8B;</h2>
+<h3 id="&#x590D;&#x4E60;jupyter&#x9B54;&#x6CD5;">&#x590D;&#x4E60;jupyter&#x9B54;&#x6CD5;</h3>
+<ol>
+<li>&#x8FD9;&#x4E2A;&#x662F;Jupyter&#x7684;&#x9B54;&#x6CD5;&#x4F7F;&#x7528;&#xFF0C;&#x5C06;&#x5B57;&#x7B26;&#x4E32;&#x5199;&#x5165;&#x6587;&#x4EF6;&#xFF0C;&#x56DE;&#x987E;&#x4E00;&#x4E0B;&#x7B97;&#x4E86;,&#x5177;&#x4F53;&#x89C1;&#x7B14;&#x8BB0;&#xFF1A;
+<a href="notebooks/python-tools/02-ipython-interpreter.ipynb">Ipython&#x89E3;&#x91CA;&#x5668;</a></li>
+</ol>
+<pre><code class="lang-python">%%writefile whodata.txt
+wesley console Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span>
+wesley pts/<span class="hljs-number">9</span> Jun <span class="hljs-number">22</span> <span class="hljs-number">01</span>:<span class="hljs-number">38</span> (<span class="hljs-number">192.168</span><span class="hljs-number">.0</span><span class="hljs-number">.6</span>)
+wesley pts/<span class="hljs-number">1</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">2</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">4</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">3</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">5</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">6</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">7</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">8</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+</code></pre>
+<pre><code>Overwriting whodata.txt
+</code></pre><ol>
+<li>&#x52A0;&#x8F7D;&#x6587;&#x4EF6;</li>
+</ol>
+<pre><code class="lang-python"><span class="hljs-comment"># %load whodata.txt</span>
+wesley console Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span>
+wesley pts/<span class="hljs-number">9</span> Jun <span class="hljs-number">22</span> <span class="hljs-number">01</span>:<span class="hljs-number">38</span> (<span class="hljs-number">192.168</span><span class="hljs-number">.0</span><span class="hljs-number">.6</span>)
+wesley pts/<span class="hljs-number">1</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">2</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">4</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">3</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">5</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">6</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">7</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+wesley pts/<span class="hljs-number">8</span> Jun <span class="hljs-number">20</span> <span class="hljs-number">20</span>:<span class="hljs-number">33</span> (:<span class="hljs-number">0.0</span>)
+</code></pre>
+<pre><code>  File &quot;&lt;ipython-input-69-851b49c8cf42&gt;&quot;, line 2
+    wesley console Jun 20 20:33
+                 ^
+SyntaxError: invalid syntax
+</code></pre><pre><code class="lang-python">%%writefile test.py
+<span class="hljs-keyword">print</span> <span class="hljs-string">&apos;Hello world&apos;</span>
+</code></pre>
+<pre><code>Writing test.py
+</code></pre><ol>
+<li>&#x8FD0;&#x884C;&#x6587;&#x4EF6;</li>
+</ol>
+<pre><code class="lang-python">%run test.py
+</code></pre>
+<pre><code>Hello world
+</code></pre><pre><code class="lang-python">!python test.py
+</code></pre>
+<pre><code>Hello world
+</code></pre><ol>
+<li>&#x5220;&#x9664;&#x6587;&#x4EF6;</li>
+</ol>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> os
+os.remove(<span class="hljs-string">&apos;test.py&apos;</span>)
+</code></pre>
+<pre><code class="lang-python">%ls
+</code></pre>
+<pre><code> &#x9A71;&#x52A8;&#x5668; E &#x4E2D;&#x7684;&#x5377;&#x662F; File Sharing
+ &#x5377;&#x7684;&#x5E8F;&#x5217;&#x53F7;&#x662F; 8EC1-8F11
+
+ E:\01-note\02-python27\python-essentials &#x7684;&#x76EE;&#x5F55;
+
+2018/07/27  16:39    &lt;DIR&gt;          .
+2018/07/27  16:39    &lt;DIR&gt;          ..
+2018/07/27  16:37    &lt;DIR&gt;          .ipynb_checkpoints
+2018/07/04  13:52            43,159 01-introduction-python.ipynb
+2018/07/04  14:00             2,128 02-date-types.ipynb
+2018/07/04  16:38            16,521 03-numbers.ipynb
+2018/07/04  17:12            20,246 04-strings.ipynb
+2018/07/04  17:24             6,082 05-indexing-slicing.ipynb
+2018/07/17  10:46            17,320 06-lists.ipynb
+2018/07/27  16:39            88,439 07-python-regular-expression.ipynb
+2018/07/17  08:57             6,674 08-mutable-and-immutable-data-types.ipynb
+2018/07/17  09:19             5,501 09-tuples.ipynb
+2018/07/18  06:48             4,489 10-speed-comparison-between-list-&amp;-tuple.ipynb
+2018/07/17  10:27            18,421 11-dictionary.ipynb
+2018/07/17  10:56            14,120 12-set.ipynb
+2018/07/17  11:09             3,317 13-frozen-sets.ipynb
+2018/07/17  11:50            12,767 14-how-python-assignment-works.ipynb
+2018/07/17  12:48             5,272 15-if-statement.ipynb
+2018/07/17  13:19             7,893 16-loops.ipynb
+2018/07/17  14:40             4,596 17-list-comprehension.ipynb
+2018/07/17  15:04            11,776 18-functions.ipynb
+2018/07/17  15:33            10,113 19-modules-and-packages.ipynb
+2018/07/17  16:24            16,718 20-exceptions.ipynb
+2018/07/17  16:30             2,893 21-warnings.ipynb
+2018/07/17  16:57           177,920 22-file-IO.ipynb
+2018/07/17  15:08               359 ex1.pyc
+2018/07/17  15:19               739 ex2.pyc
+2018/07/27  16:38               673 gendata.py
+2018/07/27  16:38               255 retasklist.py
+2018/07/27  16:38               152 whodata.py
+2018/07/27  16:38               341 whodata.txt
+              28 &#x4E2A;&#x6587;&#x4EF6;        498,884 &#x5B57;&#x8282;
+               3 &#x4E2A;&#x76EE;&#x5F55; 47,198,081,024 &#x53EF;&#x7528;&#x5B57;&#x8282;
+</code></pre><h3 id="&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x793A;&#x4F8B;">&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x793A;&#x4F8B;</h3>
+<pre><code class="lang-python">%%writefile whodata.py
+<span class="hljs-keyword">import</span> re
+f = open(<span class="hljs-string">&apos;whodata.txt&apos;</span>, <span class="hljs-string">&apos;r&apos;</span>)
+<span class="hljs-keyword">for</span> eachLine <span class="hljs-keyword">in</span> f:
+    <span class="hljs-keyword">print</span> re.split(<span class="hljs-string">r&apos;\s\s+&apos;</span>, eachLine)
+f.close()
+</code></pre>
+<pre><code>Overwriting whodata.py
+</code></pre><pre><code class="lang-python">%run whodata.py
+</code></pre>
+<pre><code>[&apos;wesley console Jun 20 20:33\n&apos;]
+[&apos;wesley pts/9 Jun 22 01:38 (192.168.0.6)\n&apos;]
+[&apos;wesley pts/1 Jun 20 20:33 (:0.0)\n&apos;]
+[&apos;wesley pts/2 Jun 20 20:33 (:0.0)\n&apos;]
+[&apos;wesley pts/4 Jun 20 20:33 (:0.0)\n&apos;]
+[&apos;wesley pts/3 Jun 20 20:33 (:0.0)\n&apos;]
+[&apos;wesley pts/5 Jun 20 20:33 (:0.0)\n&apos;]
+[&apos;wesley pts/6 Jun 20 20:33 (:0.0)\n&apos;]
+[&apos;wesley pts/7 Jun 20 20:33 (:0.0)\n&apos;]
+[&apos;wesley pts/8 Jun 20 20:33 (:0.0) &apos;]
+</code></pre><h4 id="&#x5206;&#x5272;-posix-&#x7684;-who-&#x547D;&#x4EE4;&#x8F93;&#x51FA;&#xFF08;whodatepy">&#x5206;&#x5272; POSIX &#x7684; who &#x547D;&#x4EE4;&#x8F93;&#x51FA;&#xFF08;whodate.py)</h4>
+<pre><code class="lang-python">%%writefile whodata.py
+<span class="hljs-keyword">import</span> re
+<span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">with</span> os.popen(<span class="hljs-string">&apos;whodata.txt&apos;</span>, <span class="hljs-string">&apos;r&apos;</span>) <span class="hljs-keyword">as</span> f:
+    <span class="hljs-keyword">for</span> eachLine <span class="hljs-keyword">in</span> f:
+        <span class="hljs-keyword">print</span> re.split(<span class="hljs-string">r&apos;\s\s+|\t&apos;</span>, eachLine.rstrip())
+f.close()
+</code></pre>
+<pre><code>Overwriting whodata.py
+</code></pre><pre><code class="lang-python">%run whodata.py
+</code></pre>
+<p>tasklist&#x76F8;&#x5F53;&#x4E8E;linux&#x91CC;&#x7684;who</p>
+<pre><code class="lang-python">!tasklist
+</code></pre>
+<pre><code>&#x6620;&#x50CF;&#x540D;&#x79F0;                       PID &#x4F1A;&#x8BDD;&#x540D;              &#x4F1A;&#x8BDD;#       &#x5185;&#x5B58;&#x4F7F;&#x7528; 
+========================= ======== ================ =========== ============
+System Idle Process              0 Services                   0          8 K
+System                           4 Services                   0        140 K
+Registry                        96 Services                   0     46,220 K
+smss.exe                       348 Services                   0        924 K
+csrss.exe                      528 Services                   0      3,920 K
+wininit.exe                    632 Services                   0      4,656 K
+csrss.exe                      644 Console                    1      4,692 K
+winlogon.exe                   736 Console                    1      7,132 K
+services.exe                   856 Services                   0      7,540 K
+lsass.exe                      868 Services                   0     14,756 K
+svchost.exe                    984 Services                   0      3,236 K
+fontdrvhost.exe                996 Console                    1     15,312 K
+fontdrvhost.exe                992 Services                   0      2,564 K
+svchost.exe                    464 Services                   0     26,972 K
+WUDFHost.exe                   488 Services                   0      5,124 K
+svchost.exe                    844 Services                   0     13,908 K
+svchost.exe                    800 Services                   0      7,796 K
+dwm.exe                       1108 Console                    1     54,276 K
+svchost.exe                   1188 Services                   0      9,084 K
+svchost.exe                   1244 Services                   0     13,952 K
+svchost.exe                   1364 Services                   0      8,052 K
+svchost.exe                   1444 Services                   0     10,832 K
+svchost.exe                   1492 Services                   0     12,476 K
+svchost.exe                   1500 Services                   0     13,180 K
+svchost.exe                   1564 Services                   0      9,208 K
+svchost.exe                   1640 Services                   0      5,972 K
+svchost.exe                   1648 Services                   0      8,164 K
+svchost.exe                   1724 Services                   0      7,712 K
+nvvsvc.exe                    1756 Services                   0      7,916 K
+svchost.exe                   1808 Services                   0      6,832 K
+nvxdsync.exe                  1936 Console                    1     18,564 K
+svchost.exe                   1964 Services                   0     10,720 K
+svchost.exe                   1340 Services                   0      7,996 K
+svchost.exe                   1612 Services                   0      8,768 K
+suservice.exe                 2152 Services                   0      7,204 K
+svchost.exe                   2188 Services                   0      6,672 K
+svchost.exe                   2284 Services                   0      6,204 K
+svchost.exe                   2292 Services                   0      6,048 K
+svchost.exe                   2300 Services                   0     73,516 K
+svchost.exe                   2316 Services                   0      4,888 K
+svchost.exe                   2452 Services                   0      6,844 K
+Memory Compression            2468 Services                   0    160,312 K
+igfxCUIService.exe            2576 Services                   0      7,392 K
+svchost.exe                   2648 Services                   0      6,096 K
+svchost.exe                   2656 Services                   0      7,896 K
+svchost.exe                   2680 Services                   0      6,988 K
+svchost.exe                   2768 Services                   0      6,952 K
+svchost.exe                   2776 Services                   0     13,684 K
+winwfpmonitor.exe             2848 Services                   0      1,056 K
+svchost.exe                   2880 Services                   0     10,888 K
+RtkAudioService64.exe         2976 Services                   0      5,356 K
+svchost.exe                   2984 Services                   0     14,408 K
+svchost.exe                   2440 Services                   0     16,244 K
+HaozipSvc.exe                 3076 Services                   0     13,784 K
+svchost.exe                   3088 Services                   0      5,608 K
+svchost.exe                   3104 Services                   0      9,408 K
+RAVBg64.exe                   3444 Console                    1      8,172 K
+RAVBg64.exe                   3464 Console                    1      7,988 K
+svchost.exe                   3520 Services                   0     11,716 K
+svchost.exe                   3616 Services                   0      9,416 K
+svchost.exe                   3612 Services                   0      9,876 K
+svchost.exe                   3664 Services                   0      5,572 K
+svchost.exe                   3680 Services                   0      5,724 K
+spoolsv.exe                   3832 Services                   0      8,436 K
+CAJSHost.exe                  4016 Services                   0      4,828 K
+svchost.exe                   4024 Services                   0      7,152 K
+FlashHelperService.exe        4032 Services                   0      9,336 K
+svchost.exe                   4040 Services                   0     24,172 K
+svchost.exe                   4048 Services                   0     11,468 K
+svchost.exe                   4068 Services                   0     24,496 K
+OfficeClickToRun.exe          4080 Services                   0     22,356 K
+QQProtect.exe                 4092 Services                   0     16,256 K
+svchost.exe                   3304 Services                   0      5,224 K
+svchost.exe                   2716 Services                   0      7,344 K
+IpOverUsbSvc.exe              3396 Services                   0      7,328 K
+sqlwriter.exe                 2932 Services                   0      5,556 K
+svchost.exe                   2400 Services                   0      6,564 K
+SynTPEnhService.exe           3944 Services                   0      3,612 K
+SecurityHealthService.exe     4108 Services                   0     10,524 K
+svchost.exe                   4164 Services                   0      4,768 K
+MsMpEng.exe                   4240 Services                   0    156,676 K
+svchost.exe                   4284 Services                   0     19,444 K
+svchost.exe                   4444 Services                   0      5,400 K
+svchost.exe                   4500 Services                   0      5,064 K
+svchost.exe                   4628 Services                   0      5,480 K
+svchost.exe                   4764 Services                   0      9,376 K
+sihost.exe                    5948 Console                    1     19,596 K
+svchost.exe                   6092 Console                    1     25,056 K
+svchost.exe                   6100 Services                   0      5,180 K
+SynTPEnh.exe                  6132 Console                    1     11,888 K
+svchost.exe                   5592 Console                    1     25,740 K
+explorer.exe                  5608 Console                    1    233,416 K
+taskhostw.exe                 3172 Console                    1     16,976 K
+svchost.exe                   6256 Services                   0     13,336 K
+svchost.exe                   6708 Services                   0      5,964 K
+svchost.exe                   6748 Services                   0      6,664 K
+SearchIndexer.exe             6780 Services                   0     60,696 K
+NisSrv.exe                    6788 Services                   0      9,220 K
+svchost.exe                   6864 Services                   0     10,500 K
+svchost.exe                   7012 Services                   0     10,748 K
+SynTPHelper.exe               7104 Console                    1      3,472 K
+svchost.exe                   5892 Services                   0      6,332 K
+ctfmon.exe                    7048 Console                    1     49,308 K
+ChsIME.exe                    5644 Console                    1     61,892 K
+svchost.exe                   7116 Services                   0     14,660 K
+RuntimeBroker.exe             7692 Console                    1     29,816 K
+svchost.exe                   8188 Services                   0     17,808 K
+PresentationFontCache.exe     7504 Services                   0     15,220 K
+RAVBg64.exe                   7232 Console                    1        412 K
+SettingSyncHost.exe           8276 Console                    1      3,648 K
+igfxEM.exe                    8896 Console                    1     10,216 K
+igfxHK.exe                    8920 Console                    1      7,376 K
+Video.UI.exe                  8988 Console                    1     14,604 K
+PicGo.exe                     6796 Console                    1     30,136 K
+InputPersonalization.exe      1308 Console                    1     14,644 K
+WindowsInternal.Composabl     3488 Console                    1     12,732 K
+nvtray.exe                    4116 Console                    1     10,076 K
+svchost.exe                   4656 Services                   0     13,196 K
+dllhost.exe                    792 Console                    1      9,708 K
+svchost.exe                   3048 Services                   0      6,844 K
+NvBackend.exe                 3328 Console                    1      7,188 K
+PicGo.exe                     1156 Console                    1      6,324 K
+PicGo.exe                     8244 Console                    1      4,704 K
+svchost.exe                   7084 Console                    1     22,936 K
+GoogleCrashHandler.exe         788 Services                   0        172 K
+RuntimeBroker.exe             9184 Console                    1      7,284 K
+GoogleCrashHandler64.exe      3756 Services                   0        168 K
+svchost.exe                  10064 Services                   0     16,176 K
+svchost.exe                  10684 Services                   0      7,520 K
+SgrmBroker.exe               10776 Services                   0      6,020 K
+svchost.exe                   9684 Services                   0      8,256 K
+svchost.exe                  10604 Services                   0     10,720 K
+svchost.exe                  10396 Services                   0      6,992 K
+explorer.exe                 10848 Console                    1    142,144 K
+Microsoft.Photos.exe          5584 Console                    1     49,760 K
+svchost.exe                  10836 Services                   0      8,348 K
+RuntimeBroker.exe             2788 Console                    1     25,848 K
+ApplicationFrameHost.exe      4496 Console                    1     25,076 K
+WinStore.App.exe              9860 Console                    1     60,768 K
+RuntimeBroker.exe             7160 Console                    1     12,256 K
+Calculator.exe                2708 Console                    1     34,936 K
+RuntimeBroker.exe             6884 Console                    1      5,744 K
+SystemSettings.exe            5376 Console                    1     44,312 K
+RuntimeBroker.exe            10620 Console                    1     11,640 K
+svchost.exe                  12620 Services                   0      4,924 K
+8021x.exe                    13008 Console                    1      3,228 K
+SearchUI.exe                 11728 Console                    1     55,272 K
+RuntimeBroker.exe            12796 Console                    1      7,052 K
+taskhostw.exe                12672 Console                    1     12,572 K
+WeChatStore.exe               3740 Console                    1     57,068 K
+svchost.exe                  11684 Services                   0     13,028 K
+svchost.exe                   1220 Services                   0      5,440 K
+ShellExperienceHost.exe       6624 Console                    1     59,436 K
+MicrosoftEdge.exe            15268 Console                    1     52,788 K
+browser_broker.exe           14776 Console                    1     22,576 K
+RuntimeBroker.exe            12564 Console                    1     10,632 K
+MicrosoftEdgeCP.exe          14612 Console                    1     19,720 K
+MicrosoftEdgeCP.exe           1460 Console                    1     21,660 K
+RuntimeBroker.exe             3424 Console                    1     20,820 K
+ClvAssist.exe                10988 Services                   0     11,344 K
+Clover.exe                   21724 Console                    1     31,592 K
+git-bash.exe                 18248 Console                    1      5,088 K
+mintty.exe                   20748 Console                    1     26,736 K
+conhost.exe                  20688 Console                    1     11,044 K
+bash.exe                     20476 Console                    1      8,732 K
+bash.exe                     21896 Console                    1      5,800 K
+jupyter.exe                   5732 Console                    1      4,836 K
+python.exe                   17704 Console                    1     10,552 K
+jupyter-notebook.exe         21892 Console                    1      4,832 K
+python.exe                   18980 Console                    1     52,948 K
+chrome.exe                   17384 Console                    1    136,912 K
+chrome.exe                   18088 Console                    1      8,448 K
+chrome.exe                   22040 Console                    1      9,120 K
+chrome.exe                   20764 Console                    1    128,852 K
+chrome.exe                   20228 Console                    1     22,096 K
+chrome.exe                    9104 Console                    1    302,556 K
+chrome.exe                   19644 Console                    1     89,260 K
+chrome.exe                    5852 Console                    1     39,672 K
+chrome.exe                   12604 Console                    1     33,224 K
+chrome.exe                   22100 Console                    1     33,048 K
+chrome.exe                    1480 Console                    1     32,092 K
+chrome.exe                   14536 Console                    1     47,936 K
+svchost.exe                  12356 Services                   0     11,112 K
+python.exe                   22440 Console                    1     31,472 K
+SearchProtocolHost.exe       12252 Services                   0     10,796 K
+SearchFilterHost.exe         20472 Services                   0      6,216 K
+WmiPrvSE.exe                 20252 Services                   0      9,656 K
+cmd.exe                      22188 Console                    1      3,588 K
+tasklist.exe                 10920 Console                    1      8,004 K
+</code></pre><pre><code class="lang-python">%%writefile retasklist.py
+<span class="hljs-keyword">import</span> re
+<span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">with</span> os.popen(<span class="hljs-string">&apos;tasklist /nh&apos;</span>, <span class="hljs-string">&apos;r&apos;</span>) <span class="hljs-keyword">as</span> f: <span class="hljs-comment"># &apos;/nh&#x53BB;&#x6389;&#x8FDB;&#x7A0B;&#x6C60;PID&#x7684;&#x8868;&#x683C;&#x5934;&apos;</span>
+    <span class="hljs-keyword">for</span> eachLine <span class="hljs-keyword">in</span> f:
+        <span class="hljs-keyword">print</span> re.split(<span class="hljs-string">r&apos;\s\s+|\t&apos;</span>, eachLine.rstrip())
+f.close()
+</code></pre>
+<pre><code>Overwriting retasklist.py
+</code></pre><pre><code class="lang-python">%run retasklist.py
+</code></pre>
+<pre><code>[&apos;&apos;]
+[&apos;System Idle Process&apos;, &apos;0 Services&apos;, &apos;0&apos;, &apos;8 K&apos;]
+[&apos;System&apos;, &apos;4 Services&apos;, &apos;0&apos;, &apos;140 K&apos;]
+[&apos;Registry&apos;, &apos;96 Services&apos;, &apos;0&apos;, &apos;46,004 K&apos;]
+[&apos;smss.exe&apos;, &apos;348 Services&apos;, &apos;0&apos;, &apos;924 K&apos;]
+[&apos;csrss.exe&apos;, &apos;528 Services&apos;, &apos;0&apos;, &apos;3,920 K&apos;]
+[&apos;wininit.exe&apos;, &apos;632 Services&apos;, &apos;0&apos;, &apos;4,656 K&apos;]
+[&apos;csrss.exe&apos;, &apos;644 Console&apos;, &apos;1&apos;, &apos;4,692 K&apos;]
+[&apos;winlogon.exe&apos;, &apos;736 Console&apos;, &apos;1&apos;, &apos;7,120 K&apos;]
+[&apos;services.exe&apos;, &apos;856 Services&apos;, &apos;0&apos;, &apos;7,544 K&apos;]
+[&apos;lsass.exe&apos;, &apos;868 Services&apos;, &apos;0&apos;, &apos;14,756 K&apos;]
+[&apos;svchost.exe&apos;, &apos;984 Services&apos;, &apos;0&apos;, &apos;3,236 K&apos;]
+[&apos;fontdrvhost.exe&apos;, &apos;996 Console&apos;, &apos;1&apos;, &apos;15,312 K&apos;]
+[&apos;fontdrvhost.exe&apos;, &apos;992 Services&apos;, &apos;0&apos;, &apos;2,564 K&apos;]
+[&apos;svchost.exe&apos;, &apos;464 Services&apos;, &apos;0&apos;, &apos;26,984 K&apos;]
+[&apos;WUDFHost.exe&apos;, &apos;488 Services&apos;, &apos;0&apos;, &apos;5,124 K&apos;]
+[&apos;svchost.exe&apos;, &apos;844 Services&apos;, &apos;0&apos;, &apos;13,956 K&apos;]
+[&apos;svchost.exe&apos;, &apos;800 Services&apos;, &apos;0&apos;, &apos;7,800 K&apos;]
+[&apos;dwm.exe&apos;, &apos;1108 Console&apos;, &apos;1&apos;, &apos;54,276 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1188 Services&apos;, &apos;0&apos;, &apos;9,084 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1244 Services&apos;, &apos;0&apos;, &apos;13,956 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1364 Services&apos;, &apos;0&apos;, &apos;8,052 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1444 Services&apos;, &apos;0&apos;, &apos;10,816 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1492 Services&apos;, &apos;0&apos;, &apos;12,476 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1500 Services&apos;, &apos;0&apos;, &apos;13,136 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1564 Services&apos;, &apos;0&apos;, &apos;9,208 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1640 Services&apos;, &apos;0&apos;, &apos;6,000 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1648 Services&apos;, &apos;0&apos;, &apos;8,172 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1724 Services&apos;, &apos;0&apos;, &apos;7,712 K&apos;]
+[&apos;nvvsvc.exe&apos;, &apos;1756 Services&apos;, &apos;0&apos;, &apos;7,916 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1808 Services&apos;, &apos;0&apos;, &apos;6,832 K&apos;]
+[&apos;nvxdsync.exe&apos;, &apos;1936 Console&apos;, &apos;1&apos;, &apos;18,564 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1964 Services&apos;, &apos;0&apos;, &apos;10,720 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1340 Services&apos;, &apos;0&apos;, &apos;8,016 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1612 Services&apos;, &apos;0&apos;, &apos;8,804 K&apos;]
+[&apos;suservice.exe&apos;, &apos;2152 Services&apos;, &apos;0&apos;, &apos;7,204 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2188 Services&apos;, &apos;0&apos;, &apos;6,688 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2284 Services&apos;, &apos;0&apos;, &apos;6,204 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2292 Services&apos;, &apos;0&apos;, &apos;6,048 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2300 Services&apos;, &apos;0&apos;, &apos;73,564 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2316 Services&apos;, &apos;0&apos;, &apos;4,888 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2452 Services&apos;, &apos;0&apos;, &apos;6,844 K&apos;]
+[&apos;Memory Compression&apos;, &apos;2468 Services&apos;, &apos;0&apos;, &apos;159,992 K&apos;]
+[&apos;igfxCUIService.exe&apos;, &apos;2576 Services&apos;, &apos;0&apos;, &apos;7,384 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2648 Services&apos;, &apos;0&apos;, &apos;6,096 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2656 Services&apos;, &apos;0&apos;, &apos;7,896 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2680 Services&apos;, &apos;0&apos;, &apos;6,968 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2768 Services&apos;, &apos;0&apos;, &apos;6,952 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2776 Services&apos;, &apos;0&apos;, &apos;13,684 K&apos;]
+[&apos;winwfpmonitor.exe&apos;, &apos;2848 Services&apos;, &apos;0&apos;, &apos;1,056 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2880 Services&apos;, &apos;0&apos;, &apos;10,888 K&apos;]
+[&apos;RtkAudioService64.exe&apos;, &apos;2976 Services&apos;, &apos;0&apos;, &apos;5,356 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2984 Services&apos;, &apos;0&apos;, &apos;14,408 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2440 Services&apos;, &apos;0&apos;, &apos;16,244 K&apos;]
+[&apos;HaozipSvc.exe&apos;, &apos;3076 Services&apos;, &apos;0&apos;, &apos;13,748 K&apos;]
+[&apos;svchost.exe&apos;, &apos;3088 Services&apos;, &apos;0&apos;, &apos;5,608 K&apos;]
+[&apos;svchost.exe&apos;, &apos;3104 Services&apos;, &apos;0&apos;, &apos;9,408 K&apos;]
+[&apos;RAVBg64.exe&apos;, &apos;3444 Console&apos;, &apos;1&apos;, &apos;8,172 K&apos;]
+[&apos;RAVBg64.exe&apos;, &apos;3464 Console&apos;, &apos;1&apos;, &apos;7,988 K&apos;]
+[&apos;svchost.exe&apos;, &apos;3520 Services&apos;, &apos;0&apos;, &apos;11,716 K&apos;]
+[&apos;svchost.exe&apos;, &apos;3616 Services&apos;, &apos;0&apos;, &apos;9,416 K&apos;]
+[&apos;svchost.exe&apos;, &apos;3612 Services&apos;, &apos;0&apos;, &apos;9,876 K&apos;]
+[&apos;svchost.exe&apos;, &apos;3664 Services&apos;, &apos;0&apos;, &apos;5,572 K&apos;]
+[&apos;svchost.exe&apos;, &apos;3680 Services&apos;, &apos;0&apos;, &apos;5,724 K&apos;]
+[&apos;spoolsv.exe&apos;, &apos;3832 Services&apos;, &apos;0&apos;, &apos;8,436 K&apos;]
+[&apos;CAJSHost.exe&apos;, &apos;4016 Services&apos;, &apos;0&apos;, &apos;4,828 K&apos;]
+[&apos;svchost.exe&apos;, &apos;4024 Services&apos;, &apos;0&apos;, &apos;7,148 K&apos;]
+[&apos;FlashHelperService.exe&apos;, &apos;4032 Services&apos;, &apos;0&apos;, &apos;9,336 K&apos;]
+[&apos;svchost.exe&apos;, &apos;4040 Services&apos;, &apos;0&apos;, &apos;24,200 K&apos;]
+[&apos;svchost.exe&apos;, &apos;4048 Services&apos;, &apos;0&apos;, &apos;12,260 K&apos;]
+[&apos;svchost.exe&apos;, &apos;4068 Services&apos;, &apos;0&apos;, &apos;24,496 K&apos;]
+[&apos;OfficeClickToRun.exe&apos;, &apos;4080 Services&apos;, &apos;0&apos;, &apos;22,356 K&apos;]
+[&apos;QQProtect.exe&apos;, &apos;4092 Services&apos;, &apos;0&apos;, &apos;16,256 K&apos;]
+[&apos;svchost.exe&apos;, &apos;3304 Services&apos;, &apos;0&apos;, &apos;5,224 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2716 Services&apos;, &apos;0&apos;, &apos;7,344 K&apos;]
+[&apos;IpOverUsbSvc.exe&apos;, &apos;3396 Services&apos;, &apos;0&apos;, &apos;7,328 K&apos;]
+[&apos;sqlwriter.exe&apos;, &apos;2932 Services&apos;, &apos;0&apos;, &apos;5,556 K&apos;]
+[&apos;svchost.exe&apos;, &apos;2400 Services&apos;, &apos;0&apos;, &apos;6,564 K&apos;]
+[&apos;SynTPEnhService.exe&apos;, &apos;3944 Services&apos;, &apos;0&apos;, &apos;3,612 K&apos;]
+[&apos;SecurityHealthService.exe&apos;, &apos;4108 Services&apos;, &apos;0&apos;, &apos;10,524 K&apos;]
+[&apos;svchost.exe&apos;, &apos;4164 Services&apos;, &apos;0&apos;, &apos;4,764 K&apos;]
+[&apos;MsMpEng.exe&apos;, &apos;4240 Services&apos;, &apos;0&apos;, &apos;159,124 K&apos;]
+[&apos;svchost.exe&apos;, &apos;4284 Services&apos;, &apos;0&apos;, &apos;19,444 K&apos;]
+[&apos;svchost.exe&apos;, &apos;4444 Services&apos;, &apos;0&apos;, &apos;5,400 K&apos;]
+[&apos;svchost.exe&apos;, &apos;4500 Services&apos;, &apos;0&apos;, &apos;5,064 K&apos;]
+[&apos;svchost.exe&apos;, &apos;4628 Services&apos;, &apos;0&apos;, &apos;5,480 K&apos;]
+[&apos;svchost.exe&apos;, &apos;4764 Services&apos;, &apos;0&apos;, &apos;9,376 K&apos;]
+[&apos;sihost.exe&apos;, &apos;5948 Console&apos;, &apos;1&apos;, &apos;19,596 K&apos;]
+[&apos;svchost.exe&apos;, &apos;6092 Console&apos;, &apos;1&apos;, &apos;25,100 K&apos;]
+[&apos;svchost.exe&apos;, &apos;6100 Services&apos;, &apos;0&apos;, &apos;5,180 K&apos;]
+[&apos;SynTPEnh.exe&apos;, &apos;6132 Console&apos;, &apos;1&apos;, &apos;11,888 K&apos;]
+[&apos;svchost.exe&apos;, &apos;5592 Console&apos;, &apos;1&apos;, &apos;25,740 K&apos;]
+[&apos;explorer.exe&apos;, &apos;5608 Console&apos;, &apos;1&apos;, &apos;233,416 K&apos;]
+[&apos;taskhostw.exe&apos;, &apos;3172 Console&apos;, &apos;1&apos;, &apos;16,976 K&apos;]
+[&apos;svchost.exe&apos;, &apos;6256 Services&apos;, &apos;0&apos;, &apos;13,396 K&apos;]
+[&apos;svchost.exe&apos;, &apos;6708 Services&apos;, &apos;0&apos;, &apos;5,956 K&apos;]
+[&apos;svchost.exe&apos;, &apos;6748 Services&apos;, &apos;0&apos;, &apos;6,664 K&apos;]
+[&apos;SearchIndexer.exe&apos;, &apos;6780 Services&apos;, &apos;0&apos;, &apos;60,696 K&apos;]
+[&apos;NisSrv.exe&apos;, &apos;6788 Services&apos;, &apos;0&apos;, &apos;9,220 K&apos;]
+[&apos;svchost.exe&apos;, &apos;6864 Services&apos;, &apos;0&apos;, &apos;10,500 K&apos;]
+[&apos;svchost.exe&apos;, &apos;7012 Services&apos;, &apos;0&apos;, &apos;10,748 K&apos;]
+[&apos;SynTPHelper.exe&apos;, &apos;7104 Console&apos;, &apos;1&apos;, &apos;3,472 K&apos;]
+[&apos;svchost.exe&apos;, &apos;5892 Services&apos;, &apos;0&apos;, &apos;6,332 K&apos;]
+[&apos;ctfmon.exe&apos;, &apos;7048 Console&apos;, &apos;1&apos;, &apos;49,308 K&apos;]
+[&apos;ChsIME.exe&apos;, &apos;5644 Console&apos;, &apos;1&apos;, &apos;61,892 K&apos;]
+[&apos;svchost.exe&apos;, &apos;7116 Services&apos;, &apos;0&apos;, &apos;14,660 K&apos;]
+[&apos;RuntimeBroker.exe&apos;, &apos;7692 Console&apos;, &apos;1&apos;, &apos;29,816 K&apos;]
+[&apos;svchost.exe&apos;, &apos;8188 Services&apos;, &apos;0&apos;, &apos;17,808 K&apos;]
+[&apos;PresentationFontCache.exe&apos;, &apos;7504 Services&apos;, &apos;0&apos;, &apos;15,220 K&apos;]
+[&apos;RAVBg64.exe&apos;, &apos;7232 Console&apos;, &apos;1&apos;, &apos;412 K&apos;]
+[&apos;SettingSyncHost.exe&apos;, &apos;8276 Console&apos;, &apos;1&apos;, &apos;3,648 K&apos;]
+[&apos;igfxEM.exe&apos;, &apos;8896 Console&apos;, &apos;1&apos;, &apos;10,216 K&apos;]
+[&apos;igfxHK.exe&apos;, &apos;8920 Console&apos;, &apos;1&apos;, &apos;7,380 K&apos;]
+[&apos;Video.UI.exe&apos;, &apos;8988 Console&apos;, &apos;1&apos;, &apos;14,604 K&apos;]
+[&apos;PicGo.exe&apos;, &apos;6796 Console&apos;, &apos;1&apos;, &apos;30,136 K&apos;]
+[&apos;InputPersonalization.exe&apos;, &apos;1308 Console&apos;, &apos;1&apos;, &apos;14,644 K&apos;]
+[&apos;WindowsInternal.Composabl&apos;, &apos;3488 Console&apos;, &apos;1&apos;, &apos;12,732 K&apos;]
+[&apos;nvtray.exe&apos;, &apos;4116 Console&apos;, &apos;1&apos;, &apos;10,076 K&apos;]
+[&apos;svchost.exe&apos;, &apos;4656 Services&apos;, &apos;0&apos;, &apos;13,196 K&apos;]
+[&apos;dllhost.exe&apos;, &apos;792 Console&apos;, &apos;1&apos;, &apos;9,708 K&apos;]
+[&apos;svchost.exe&apos;, &apos;3048 Services&apos;, &apos;0&apos;, &apos;6,844 K&apos;]
+[&apos;NvBackend.exe&apos;, &apos;3328 Console&apos;, &apos;1&apos;, &apos;7,188 K&apos;]
+[&apos;PicGo.exe&apos;, &apos;1156 Console&apos;, &apos;1&apos;, &apos;6,324 K&apos;]
+[&apos;PicGo.exe&apos;, &apos;8244 Console&apos;, &apos;1&apos;, &apos;4,704 K&apos;]
+[&apos;svchost.exe&apos;, &apos;7084 Console&apos;, &apos;1&apos;, &apos;22,936 K&apos;]
+[&apos;GoogleCrashHandler.exe&apos;, &apos;788 Services&apos;, &apos;0&apos;, &apos;172 K&apos;]
+[&apos;RuntimeBroker.exe&apos;, &apos;9184 Console&apos;, &apos;1&apos;, &apos;7,284 K&apos;]
+[&apos;GoogleCrashHandler64.exe&apos;, &apos;3756 Services&apos;, &apos;0&apos;, &apos;168 K&apos;]
+[&apos;svchost.exe&apos;, &apos;10064 Services&apos;, &apos;0&apos;, &apos;16,176 K&apos;]
+[&apos;svchost.exe&apos;, &apos;10684 Services&apos;, &apos;0&apos;, &apos;7,520 K&apos;]
+[&apos;SgrmBroker.exe&apos;, &apos;10776 Services&apos;, &apos;0&apos;, &apos;6,020 K&apos;]
+[&apos;svchost.exe&apos;, &apos;9684 Services&apos;, &apos;0&apos;, &apos;8,256 K&apos;]
+[&apos;svchost.exe&apos;, &apos;10604 Services&apos;, &apos;0&apos;, &apos;10,720 K&apos;]
+[&apos;svchost.exe&apos;, &apos;10396 Services&apos;, &apos;0&apos;, &apos;6,992 K&apos;]
+[&apos;explorer.exe&apos;, &apos;10848 Console&apos;, &apos;1&apos;, &apos;142,144 K&apos;]
+[&apos;Microsoft.Photos.exe&apos;, &apos;5584 Console&apos;, &apos;1&apos;, &apos;49,760 K&apos;]
+[&apos;svchost.exe&apos;, &apos;10836 Services&apos;, &apos;0&apos;, &apos;8,348 K&apos;]
+[&apos;RuntimeBroker.exe&apos;, &apos;2788 Console&apos;, &apos;1&apos;, &apos;25,848 K&apos;]
+[&apos;ApplicationFrameHost.exe&apos;, &apos;4496 Console&apos;, &apos;1&apos;, &apos;25,076 K&apos;]
+[&apos;WinStore.App.exe&apos;, &apos;9860 Console&apos;, &apos;1&apos;, &apos;60,768 K&apos;]
+[&apos;RuntimeBroker.exe&apos;, &apos;7160 Console&apos;, &apos;1&apos;, &apos;12,256 K&apos;]
+[&apos;Calculator.exe&apos;, &apos;2708 Console&apos;, &apos;1&apos;, &apos;34,936 K&apos;]
+[&apos;RuntimeBroker.exe&apos;, &apos;6884 Console&apos;, &apos;1&apos;, &apos;5,744 K&apos;]
+[&apos;SystemSettings.exe&apos;, &apos;5376 Console&apos;, &apos;1&apos;, &apos;44,312 K&apos;]
+[&apos;RuntimeBroker.exe&apos;, &apos;10620 Console&apos;, &apos;1&apos;, &apos;11,640 K&apos;]
+[&apos;svchost.exe&apos;, &apos;12620 Services&apos;, &apos;0&apos;, &apos;4,924 K&apos;]
+[&apos;8021x.exe&apos;, &apos;13008 Console&apos;, &apos;1&apos;, &apos;3,920 K&apos;]
+[&apos;SearchUI.exe&apos;, &apos;11728 Console&apos;, &apos;1&apos;, &apos;55,272 K&apos;]
+[&apos;RuntimeBroker.exe&apos;, &apos;12796 Console&apos;, &apos;1&apos;, &apos;7,052 K&apos;]
+[&apos;taskhostw.exe&apos;, &apos;12672 Console&apos;, &apos;1&apos;, &apos;12,572 K&apos;]
+[&apos;WeChatStore.exe&apos;, &apos;3740 Console&apos;, &apos;1&apos;, &apos;57,068 K&apos;]
+[&apos;svchost.exe&apos;, &apos;11684 Services&apos;, &apos;0&apos;, &apos;13,028 K&apos;]
+[&apos;svchost.exe&apos;, &apos;1220 Services&apos;, &apos;0&apos;, &apos;5,400 K&apos;]
+[&apos;ShellExperienceHost.exe&apos;, &apos;6624 Console&apos;, &apos;1&apos;, &apos;59,376 K&apos;]
+[&apos;MicrosoftEdge.exe&apos;, &apos;15268 Console&apos;, &apos;1&apos;, &apos;52,788 K&apos;]
+[&apos;browser_broker.exe&apos;, &apos;14776 Console&apos;, &apos;1&apos;, &apos;22,576 K&apos;]
+[&apos;RuntimeBroker.exe&apos;, &apos;12564 Console&apos;, &apos;1&apos;, &apos;10,632 K&apos;]
+[&apos;MicrosoftEdgeCP.exe&apos;, &apos;14612 Console&apos;, &apos;1&apos;, &apos;19,720 K&apos;]
+[&apos;MicrosoftEdgeCP.exe&apos;, &apos;1460 Console&apos;, &apos;1&apos;, &apos;21,660 K&apos;]
+[&apos;RuntimeBroker.exe&apos;, &apos;3424 Console&apos;, &apos;1&apos;, &apos;20,820 K&apos;]
+[&apos;ClvAssist.exe&apos;, &apos;10988 Services&apos;, &apos;0&apos;, &apos;11,344 K&apos;]
+[&apos;Clover.exe&apos;, &apos;21724 Console&apos;, &apos;1&apos;, &apos;31,592 K&apos;]
+[&apos;git-bash.exe&apos;, &apos;18248 Console&apos;, &apos;1&apos;, &apos;5,088 K&apos;]
+[&apos;mintty.exe&apos;, &apos;20748 Console&apos;, &apos;1&apos;, &apos;26,736 K&apos;]
+[&apos;conhost.exe&apos;, &apos;20688 Console&apos;, &apos;1&apos;, &apos;11,044 K&apos;]
+[&apos;bash.exe&apos;, &apos;20476 Console&apos;, &apos;1&apos;, &apos;8,732 K&apos;]
+[&apos;bash.exe&apos;, &apos;21896 Console&apos;, &apos;1&apos;, &apos;5,800 K&apos;]
+[&apos;jupyter.exe&apos;, &apos;5732 Console&apos;, &apos;1&apos;, &apos;4,836 K&apos;]
+[&apos;python.exe&apos;, &apos;17704 Console&apos;, &apos;1&apos;, &apos;10,552 K&apos;]
+[&apos;jupyter-notebook.exe&apos;, &apos;21892 Console&apos;, &apos;1&apos;, &apos;4,832 K&apos;]
+[&apos;python.exe&apos;, &apos;18980 Console&apos;, &apos;1&apos;, &apos;52,952 K&apos;]
+[&apos;chrome.exe&apos;, &apos;17384 Console&apos;, &apos;1&apos;, &apos;136,880 K&apos;]
+[&apos;chrome.exe&apos;, &apos;18088 Console&apos;, &apos;1&apos;, &apos;8,448 K&apos;]
+[&apos;chrome.exe&apos;, &apos;22040 Console&apos;, &apos;1&apos;, &apos;9,120 K&apos;]
+[&apos;chrome.exe&apos;, &apos;20764 Console&apos;, &apos;1&apos;, &apos;125,724 K&apos;]
+[&apos;chrome.exe&apos;, &apos;20228 Console&apos;, &apos;1&apos;, &apos;22,096 K&apos;]
+[&apos;chrome.exe&apos;, &apos;9104 Console&apos;, &apos;1&apos;, &apos;303,500 K&apos;]
+[&apos;chrome.exe&apos;, &apos;19644 Console&apos;, &apos;1&apos;, &apos;89,260 K&apos;]
+[&apos;chrome.exe&apos;, &apos;5852 Console&apos;, &apos;1&apos;, &apos;39,672 K&apos;]
+[&apos;chrome.exe&apos;, &apos;12604 Console&apos;, &apos;1&apos;, &apos;33,224 K&apos;]
+[&apos;chrome.exe&apos;, &apos;22100 Console&apos;, &apos;1&apos;, &apos;33,048 K&apos;]
+[&apos;chrome.exe&apos;, &apos;1480 Console&apos;, &apos;1&apos;, &apos;32,092 K&apos;]
+[&apos;chrome.exe&apos;, &apos;14536 Console&apos;, &apos;1&apos;, &apos;47,936 K&apos;]
+[&apos;svchost.exe&apos;, &apos;12356 Services&apos;, &apos;0&apos;, &apos;11,112 K&apos;]
+[&apos;python.exe&apos;, &apos;22440 Console&apos;, &apos;1&apos;, &apos;31,564 K&apos;]
+[&apos;SearchProtocolHost.exe&apos;, &apos;12252 Services&apos;, &apos;0&apos;, &apos;10,732 K&apos;]
+[&apos;SearchFilterHost.exe&apos;, &apos;20472 Services&apos;, &apos;0&apos;, &apos;6,216 K&apos;]
+[&apos;WmiPrvSE.exe&apos;, &apos;20252 Services&apos;, &apos;0&apos;, &apos;9,832 K&apos;]
+[&apos;cmd.exe&apos;, &apos;20616 Console&apos;, &apos;1&apos;, &apos;3,544 K&apos;]
+[&apos;tasklist.exe&apos;, &apos;16932 Console&apos;, &apos;1&apos;, &apos;8,016 K&apos;]
+</code></pre><p>&#x6B64;&#x65F6;PID&#x548C;&#x4F1A;&#x8BDD;&#x540D;&#x79F0;&#x653E;&#x5728;&#x4E00;&#x8D77;&#x4E86;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x5C06;&#x4ED6;&#x5206;&#x5F00;&#xFF0C;&#x7531;&#x4E8E;split&#x7684;&#x9650;&#x5236;&#xFF0C;&#x6240;&#x4EE5;&#x8981;&#x4F7F;&#x7528;findall</p>
+<pre><code class="lang-python">%%writefile retasklist.py
+<span class="hljs-keyword">import</span> re
+<span class="hljs-keyword">import</span> os
+
+pat = <span class="hljs-string">r&apos;([\w.]+(?: [\w.]+)*)\s\s+(\d+) \w+\s\s+\d+\s\s+([\d,]+ K)&apos;</span>
+<span class="hljs-keyword">with</span> os.popen(<span class="hljs-string">&apos;tasklist /nh&apos;</span>, <span class="hljs-string">&apos;r&apos;</span>) <span class="hljs-keyword">as</span> f: <span class="hljs-comment"># &apos;/nh&#x53BB;&#x6389;&#x8FDB;&#x7A0B;&#x6C60;PID&#x7684;&#x8868;&#x683C;&#x5934;&apos;</span>
+    <span class="hljs-keyword">for</span> eachLine <span class="hljs-keyword">in</span> f:
+        <span class="hljs-keyword">print</span> re.findall(pat, eachLine.rstrip())
+f.close()
+</code></pre>
+<pre><code>Overwriting retasklist.py
+</code></pre><pre><code class="lang-python">%run retasklist.py
+</code></pre>
+<pre><code>[]
+[(&apos;System Idle Process&apos;, &apos;0&apos;, &apos;8 K&apos;)]
+[(&apos;System&apos;, &apos;4&apos;, &apos;140 K&apos;)]
+[(&apos;Registry&apos;, &apos;96&apos;, &apos;44,840 K&apos;)]
+[(&apos;smss.exe&apos;, &apos;348&apos;, &apos;924 K&apos;)]
+[(&apos;csrss.exe&apos;, &apos;528&apos;, &apos;3,920 K&apos;)]
+[(&apos;wininit.exe&apos;, &apos;632&apos;, &apos;4,656 K&apos;)]
+[(&apos;csrss.exe&apos;, &apos;644&apos;, &apos;4,692 K&apos;)]
+[(&apos;winlogon.exe&apos;, &apos;736&apos;, &apos;7,116 K&apos;)]
+[(&apos;services.exe&apos;, &apos;856&apos;, &apos;7,544 K&apos;)]
+[(&apos;lsass.exe&apos;, &apos;868&apos;, &apos;14,756 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;984&apos;, &apos;3,236 K&apos;)]
+[(&apos;fontdrvhost.exe&apos;, &apos;996&apos;, &apos;15,312 K&apos;)]
+[(&apos;fontdrvhost.exe&apos;, &apos;992&apos;, &apos;2,564 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;464&apos;, &apos;26,984 K&apos;)]
+[(&apos;WUDFHost.exe&apos;, &apos;488&apos;, &apos;5,124 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;844&apos;, &apos;13,920 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;800&apos;, &apos;7,804 K&apos;)]
+[(&apos;dwm.exe&apos;, &apos;1108&apos;, &apos;51,672 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1188&apos;, &apos;9,084 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1244&apos;, &apos;14,080 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1364&apos;, &apos;8,052 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1444&apos;, &apos;10,816 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1492&apos;, &apos;12,476 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1500&apos;, &apos;13,136 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1564&apos;, &apos;9,208 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1640&apos;, &apos;6,000 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1648&apos;, &apos;8,172 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1724&apos;, &apos;7,712 K&apos;)]
+[(&apos;nvvsvc.exe&apos;, &apos;1756&apos;, &apos;7,916 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1808&apos;, &apos;6,832 K&apos;)]
+[(&apos;nvxdsync.exe&apos;, &apos;1936&apos;, &apos;18,564 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1964&apos;, &apos;10,720 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1340&apos;, &apos;8,000 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1612&apos;, &apos;8,764 K&apos;)]
+[(&apos;suservice.exe&apos;, &apos;2152&apos;, &apos;7,204 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2188&apos;, &apos;6,688 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2284&apos;, &apos;6,204 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2292&apos;, &apos;6,048 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2300&apos;, &apos;73,572 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2316&apos;, &apos;4,888 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2452&apos;, &apos;6,844 K&apos;)]
+[(&apos;Memory Compression&apos;, &apos;2468&apos;, &apos;159,452 K&apos;)]
+[(&apos;igfxCUIService.exe&apos;, &apos;2576&apos;, &apos;7,384 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2648&apos;, &apos;6,096 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2656&apos;, &apos;7,896 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2680&apos;, &apos;6,968 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2768&apos;, &apos;6,952 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2776&apos;, &apos;13,700 K&apos;)]
+[(&apos;winwfpmonitor.exe&apos;, &apos;2848&apos;, &apos;1,056 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2880&apos;, &apos;10,888 K&apos;)]
+[(&apos;RtkAudioService64.exe&apos;, &apos;2976&apos;, &apos;5,356 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2984&apos;, &apos;14,408 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2440&apos;, &apos;16,244 K&apos;)]
+[(&apos;HaozipSvc.exe&apos;, &apos;3076&apos;, &apos;13,748 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;3088&apos;, &apos;5,608 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;3104&apos;, &apos;9,408 K&apos;)]
+[(&apos;RAVBg64.exe&apos;, &apos;3444&apos;, &apos;8,172 K&apos;)]
+[(&apos;RAVBg64.exe&apos;, &apos;3464&apos;, &apos;7,988 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;3520&apos;, &apos;11,716 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;3616&apos;, &apos;9,416 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;3612&apos;, &apos;9,876 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;3664&apos;, &apos;5,572 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;3680&apos;, &apos;5,724 K&apos;)]
+[(&apos;spoolsv.exe&apos;, &apos;3832&apos;, &apos;8,436 K&apos;)]
+[(&apos;CAJSHost.exe&apos;, &apos;4016&apos;, &apos;4,828 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;4024&apos;, &apos;7,148 K&apos;)]
+[(&apos;FlashHelperService.exe&apos;, &apos;4032&apos;, &apos;9,336 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;4040&apos;, &apos;24,212 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;4048&apos;, &apos;12,228 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;4068&apos;, &apos;24,496 K&apos;)]
+[(&apos;OfficeClickToRun.exe&apos;, &apos;4080&apos;, &apos;22,356 K&apos;)]
+[(&apos;QQProtect.exe&apos;, &apos;4092&apos;, &apos;16,188 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;3304&apos;, &apos;5,224 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2716&apos;, &apos;7,344 K&apos;)]
+[(&apos;IpOverUsbSvc.exe&apos;, &apos;3396&apos;, &apos;7,328 K&apos;)]
+[(&apos;sqlwriter.exe&apos;, &apos;2932&apos;, &apos;5,556 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;2400&apos;, &apos;6,564 K&apos;)]
+[(&apos;SynTPEnhService.exe&apos;, &apos;3944&apos;, &apos;3,608 K&apos;)]
+[(&apos;SecurityHealthService.exe&apos;, &apos;4108&apos;, &apos;10,524 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;4164&apos;, &apos;4,764 K&apos;)]
+[(&apos;MsMpEng.exe&apos;, &apos;4240&apos;, &apos;159,172 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;4284&apos;, &apos;19,424 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;4444&apos;, &apos;5,400 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;4500&apos;, &apos;5,064 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;4628&apos;, &apos;5,480 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;4764&apos;, &apos;9,376 K&apos;)]
+[(&apos;sihost.exe&apos;, &apos;5948&apos;, &apos;19,596 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;6092&apos;, &apos;25,084 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;6100&apos;, &apos;5,180 K&apos;)]
+[(&apos;SynTPEnh.exe&apos;, &apos;6132&apos;, &apos;11,888 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;5592&apos;, &apos;25,740 K&apos;)]
+[(&apos;explorer.exe&apos;, &apos;5608&apos;, &apos;233,444 K&apos;)]
+[(&apos;taskhostw.exe&apos;, &apos;3172&apos;, &apos;16,976 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;6256&apos;, &apos;13,396 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;6708&apos;, &apos;5,956 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;6748&apos;, &apos;6,664 K&apos;)]
+[(&apos;SearchIndexer.exe&apos;, &apos;6780&apos;, &apos;60,696 K&apos;)]
+[(&apos;NisSrv.exe&apos;, &apos;6788&apos;, &apos;9,220 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;6864&apos;, &apos;10,500 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;7012&apos;, &apos;10,748 K&apos;)]
+[(&apos;SynTPHelper.exe&apos;, &apos;7104&apos;, &apos;3,472 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;5892&apos;, &apos;6,332 K&apos;)]
+[(&apos;ctfmon.exe&apos;, &apos;7048&apos;, &apos;49,308 K&apos;)]
+[(&apos;ChsIME.exe&apos;, &apos;5644&apos;, &apos;61,892 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;7116&apos;, &apos;14,660 K&apos;)]
+[(&apos;RuntimeBroker.exe&apos;, &apos;7692&apos;, &apos;29,816 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;8188&apos;, &apos;17,808 K&apos;)]
+[(&apos;PresentationFontCache.exe&apos;, &apos;7504&apos;, &apos;15,220 K&apos;)]
+[(&apos;RAVBg64.exe&apos;, &apos;7232&apos;, &apos;412 K&apos;)]
+[(&apos;SettingSyncHost.exe&apos;, &apos;8276&apos;, &apos;3,648 K&apos;)]
+[(&apos;igfxEM.exe&apos;, &apos;8896&apos;, &apos;10,216 K&apos;)]
+[(&apos;igfxHK.exe&apos;, &apos;8920&apos;, &apos;7,380 K&apos;)]
+[(&apos;Video.UI.exe&apos;, &apos;8988&apos;, &apos;14,604 K&apos;)]
+[(&apos;PicGo.exe&apos;, &apos;6796&apos;, &apos;30,136 K&apos;)]
+[(&apos;InputPersonalization.exe&apos;, &apos;1308&apos;, &apos;14,644 K&apos;)]
+[(&apos;WindowsInternal.Composabl&apos;, &apos;3488&apos;, &apos;12,732 K&apos;)]
+[(&apos;nvtray.exe&apos;, &apos;4116&apos;, &apos;10,076 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;4656&apos;, &apos;13,196 K&apos;)]
+[(&apos;dllhost.exe&apos;, &apos;792&apos;, &apos;9,708 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;3048&apos;, &apos;6,844 K&apos;)]
+[(&apos;NvBackend.exe&apos;, &apos;3328&apos;, &apos;7,188 K&apos;)]
+[(&apos;PicGo.exe&apos;, &apos;1156&apos;, &apos;6,324 K&apos;)]
+[(&apos;PicGo.exe&apos;, &apos;8244&apos;, &apos;4,704 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;7084&apos;, &apos;22,936 K&apos;)]
+[(&apos;GoogleCrashHandler.exe&apos;, &apos;788&apos;, &apos;172 K&apos;)]
+[(&apos;RuntimeBroker.exe&apos;, &apos;9184&apos;, &apos;7,284 K&apos;)]
+[(&apos;GoogleCrashHandler64.exe&apos;, &apos;3756&apos;, &apos;168 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;10064&apos;, &apos;16,176 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;10684&apos;, &apos;7,520 K&apos;)]
+[(&apos;SgrmBroker.exe&apos;, &apos;10776&apos;, &apos;6,020 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;9684&apos;, &apos;8,256 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;10604&apos;, &apos;10,720 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;10396&apos;, &apos;6,992 K&apos;)]
+[(&apos;explorer.exe&apos;, &apos;10848&apos;, &apos;142,144 K&apos;)]
+[(&apos;Microsoft.Photos.exe&apos;, &apos;5584&apos;, &apos;49,760 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;10836&apos;, &apos;8,348 K&apos;)]
+[(&apos;RuntimeBroker.exe&apos;, &apos;2788&apos;, &apos;25,848 K&apos;)]
+[(&apos;ApplicationFrameHost.exe&apos;, &apos;4496&apos;, &apos;24,968 K&apos;)]
+[(&apos;WinStore.App.exe&apos;, &apos;9860&apos;, &apos;60,768 K&apos;)]
+[(&apos;RuntimeBroker.exe&apos;, &apos;7160&apos;, &apos;12,256 K&apos;)]
+[(&apos;Calculator.exe&apos;, &apos;2708&apos;, &apos;34,936 K&apos;)]
+[(&apos;RuntimeBroker.exe&apos;, &apos;6884&apos;, &apos;5,744 K&apos;)]
+[(&apos;SystemSettings.exe&apos;, &apos;5376&apos;, &apos;44,312 K&apos;)]
+[(&apos;RuntimeBroker.exe&apos;, &apos;10620&apos;, &apos;11,640 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;12620&apos;, &apos;4,924 K&apos;)]
+[(&apos;8021x.exe&apos;, &apos;13008&apos;, &apos;4,016 K&apos;)]
+[(&apos;SearchUI.exe&apos;, &apos;11728&apos;, &apos;55,272 K&apos;)]
+[(&apos;RuntimeBroker.exe&apos;, &apos;12796&apos;, &apos;7,052 K&apos;)]
+[(&apos;taskhostw.exe&apos;, &apos;12672&apos;, &apos;12,572 K&apos;)]
+[(&apos;WeChatStore.exe&apos;, &apos;3740&apos;, &apos;57,068 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;11684&apos;, &apos;13,028 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;1220&apos;, &apos;5,388 K&apos;)]
+[(&apos;ShellExperienceHost.exe&apos;, &apos;6624&apos;, &apos;59,376 K&apos;)]
+[(&apos;MicrosoftEdge.exe&apos;, &apos;15268&apos;, &apos;52,788 K&apos;)]
+[(&apos;browser_broker.exe&apos;, &apos;14776&apos;, &apos;22,576 K&apos;)]
+[(&apos;RuntimeBroker.exe&apos;, &apos;12564&apos;, &apos;10,632 K&apos;)]
+[(&apos;MicrosoftEdgeCP.exe&apos;, &apos;14612&apos;, &apos;19,720 K&apos;)]
+[(&apos;MicrosoftEdgeCP.exe&apos;, &apos;1460&apos;, &apos;21,660 K&apos;)]
+[(&apos;RuntimeBroker.exe&apos;, &apos;3424&apos;, &apos;20,820 K&apos;)]
+[(&apos;ClvAssist.exe&apos;, &apos;10988&apos;, &apos;11,344 K&apos;)]
+[(&apos;Clover.exe&apos;, &apos;21724&apos;, &apos;31,592 K&apos;)]
+[(&apos;bash.exe&apos;, &apos;18248&apos;, &apos;5,088 K&apos;)]
+[(&apos;mintty.exe&apos;, &apos;20748&apos;, &apos;26,736 K&apos;)]
+[(&apos;conhost.exe&apos;, &apos;20688&apos;, &apos;11,044 K&apos;)]
+[(&apos;bash.exe&apos;, &apos;20476&apos;, &apos;8,732 K&apos;)]
+[(&apos;bash.exe&apos;, &apos;21896&apos;, &apos;5,800 K&apos;)]
+[(&apos;jupyter.exe&apos;, &apos;5732&apos;, &apos;4,836 K&apos;)]
+[(&apos;python.exe&apos;, &apos;17704&apos;, &apos;10,552 K&apos;)]
+[(&apos;notebook.exe&apos;, &apos;21892&apos;, &apos;4,832 K&apos;)]
+[(&apos;python.exe&apos;, &apos;18980&apos;, &apos;52,952 K&apos;)]
+[(&apos;chrome.exe&apos;, &apos;17384&apos;, &apos;136,880 K&apos;)]
+[(&apos;chrome.exe&apos;, &apos;18088&apos;, &apos;8,448 K&apos;)]
+[(&apos;chrome.exe&apos;, &apos;22040&apos;, &apos;9,120 K&apos;)]
+[(&apos;chrome.exe&apos;, &apos;20764&apos;, &apos;125,712 K&apos;)]
+[(&apos;chrome.exe&apos;, &apos;20228&apos;, &apos;22,096 K&apos;)]
+[(&apos;chrome.exe&apos;, &apos;9104&apos;, &apos;310,240 K&apos;)]
+[(&apos;chrome.exe&apos;, &apos;19644&apos;, &apos;89,260 K&apos;)]
+[(&apos;chrome.exe&apos;, &apos;5852&apos;, &apos;39,672 K&apos;)]
+[(&apos;chrome.exe&apos;, &apos;12604&apos;, &apos;33,224 K&apos;)]
+[(&apos;chrome.exe&apos;, &apos;22100&apos;, &apos;33,048 K&apos;)]
+[(&apos;chrome.exe&apos;, &apos;1480&apos;, &apos;32,092 K&apos;)]
+[(&apos;chrome.exe&apos;, &apos;14536&apos;, &apos;47,936 K&apos;)]
+[(&apos;svchost.exe&apos;, &apos;12356&apos;, &apos;11,112 K&apos;)]
+[(&apos;python.exe&apos;, &apos;22440&apos;, &apos;31,564 K&apos;)]
+[(&apos;SearchProtocolHost.exe&apos;, &apos;12252&apos;, &apos;10,636 K&apos;)]
+[(&apos;SearchFilterHost.exe&apos;, &apos;20472&apos;, &apos;6,216 K&apos;)]
+[(&apos;WmiPrvSE.exe&apos;, &apos;20252&apos;, &apos;9,876 K&apos;)]
+[(&apos;cmd.exe&apos;, &apos;18660&apos;, &apos;3,564 K&apos;)]
+[(&apos;tasklist.exe&apos;, &apos;11796&apos;, &apos;8,020 K&apos;)]
+</code></pre><h4 id="&#x5B9E;&#x6218;&#x793A;&#x4F8B;">&#x5B9E;&#x6218;&#x793A;&#x4F8B;</h4>
+<pre><code class="lang-python">%%writefile gendata.py
+<span class="hljs-comment"># coding=utf-8</span>
+<span class="hljs-comment"># &#x521B;&#x5EFA;&#x968F;&#x673A;&#x6570;&#x636E;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x751F;&#x6210;&#x7684;&#x6570;&#x636E;&#x8F93;&#x51FA;&#x5230;&#x5C4F;&#x5E55;</span>
+<span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> randrange, choice
+<span class="hljs-keyword">from</span> string <span class="hljs-keyword">import</span> ascii_lowercase <span class="hljs-keyword">as</span> lc
+<span class="hljs-keyword">from</span> sys <span class="hljs-keyword">import</span> maxint
+<span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> ctime
+
+tlds = ( <span class="hljs-string">&apos;com&apos;</span>, <span class="hljs-string">&apos;edu&apos;</span>, <span class="hljs-string">&apos;net&apos;</span>, <span class="hljs-string">&apos;org&apos;</span>, <span class="hljs-string">&apos;gov&apos;</span> )
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> xrange(randrange(<span class="hljs-number">5</span>, <span class="hljs-number">11</span>)):
+    dtint = randrange(maxint)    <span class="hljs-comment"># pick date</span>
+    dtstr = ctime(dtint)    <span class="hljs-comment"># date string</span>
+    llen = randrange(<span class="hljs-number">4</span>, <span class="hljs-number">7</span>)    <span class="hljs-comment"># login is shorter</span>
+    login = <span class="hljs-string">&apos;&apos;</span>.join(choice(lc) <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(llen))
+    dlen = randrange(llen, <span class="hljs-number">13</span>)    <span class="hljs-comment"># domain is longer</span>
+    dom = <span class="hljs-string">&apos;&apos;</span>.join(choice(lc) <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> xrange(dlen))
+    <span class="hljs-keyword">print</span> <span class="hljs-string">&apos;%s::%s@%s.%s::%d-%d-%d&apos;</span> % (dtstr, login,
+    dom, choice(tlds), dtint, llen, dlen)
+</code></pre>
+<pre><code>Overwriting gendata.py
+</code></pre><pre><code class="lang-python">%run gendata.py
+</code></pre>
+<pre><code>Thu Dec 27 01:10:08 2035::dqtypg@iavqvgjwnvn.edu::2082301808-6-11
+Fri May 13 20:51:55 2033::osxul@elfzkq.gov::1999601515-5-6
+Mon Apr 06 22:52:20 2020::rehbg@yfdoy.edu::1586184740-5-5
+Wed Dec 31 23:22:03 2008::legdw@tonqsajuiuch.edu::1230736923-5-12
+Sat Sep 05 12:49:23 2015::tkyyb@oygzos.edu::1441428563-5-6
+Mon May 27 08:00:35 2013::ztkuz@usczxpegy.gov::1369612835-5-9
+Mon Jul 06 14:17:37 2015::urpy@eblts.org::1436163457-4-5
+</code></pre><pre><code class="lang-python"><span class="hljs-keyword">import</span> re
+data = <span class="hljs-string">&apos;Thu Feb 15 17:46:04 2007::uzifzf@dpyivihw.gov::1171590364-6-8&apos;</span>
+patt = <span class="hljs-string">&apos;^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)&apos;</span>
+m = re.match(patt, data)
+m.group()
+</code></pre>
+<pre><code>&apos;Thu&apos;
+</code></pre><pre><code class="lang-python">m.group(<span class="hljs-number">1</span>)
+</code></pre>
+<pre><code>&apos;Thu&apos;
+</code></pre><pre><code class="lang-python">m.groups()
+</code></pre>
+<pre><code>(&apos;Thu&apos;,)
+</code></pre><pre><code class="lang-python">patt = <span class="hljs-string">&apos;^(\w{3})&apos;</span>
+m = re.match(patt, data)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>: <span class="hljs-keyword">print</span> m.group()
+</code></pre>
+<pre><code>Thu
+</code></pre><pre><code class="lang-python">m.group(<span class="hljs-number">1</span>)
+</code></pre>
+<pre><code>&apos;Thu&apos;
+</code></pre><pre><code class="lang-python">patt = <span class="hljs-string">&apos;^(\w){3}&apos;</span>  <span class="hljs-comment"># &#x6CE8;&#x610F;&#x533A;&#x522B;</span>
+m = re.match(patt, data)
+<span class="hljs-keyword">if</span> m <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">None</span>: <span class="hljs-keyword">print</span> m.group()
+</code></pre>
+<pre><code>Thu
+</code></pre><pre><code class="lang-python">m.group(<span class="hljs-number">1</span>)
+</code></pre>
+<pre><code>&apos;u&apos;
+</code></pre><h3 id="&#x641C;&#x7D22;&#x3001;&#x5339;&#x914D;&#x548C;&#x8D2A;&#x5A6A;">&#x641C;&#x7D22;&#x3001;&#x5339;&#x914D;&#x548C;&#x8D2A;&#x5A6A;</h3>
+<pre><code class="lang-python">patt = <span class="hljs-string">&apos;\d+-\d+-\d+&apos;</span>
+re.search(patt, data).group()
+</code></pre>
+<pre><code>&apos;1171590364-6-8&apos;
+</code></pre><pre><code class="lang-python">patt = <span class="hljs-string">&apos;.+(\d+-\d+-\d+)&apos;</span>
+re.search(patt, data).group(<span class="hljs-number">1</span>)
+</code></pre>
+<pre><code>&apos;4-6-8&apos;
+</code></pre><p>&#x8FD9;&#x5C31;&#x662F;&#x6240;&#x8C13;&#x7684;&#x8D2A;&#x5A6A;&#xFF0C;<code>.</code>&#x628A;&#x524D;&#x9762;&#x7684;&#x6570;&#x5B57;&#x4E5F;&#x7ED9;&#x5339;&#x914D;&#x4E86;</p>
+<pre><code class="lang-python">patt = <span class="hljs-string">&apos;.+?(\d+-\d+-\d+)&apos;</span>  <span class="hljs-comment"># &#xFF1F;&#x662F;&#x975E;&#x8D2A;&#x5A6A;&#x64CD;&#x4F5C;&#x7B26;</span>
+re.search(patt, data).group(<span class="hljs-number">1</span>)
+</code></pre>
+<pre><code>&apos;1171590364-6-8&apos;
+</code></pre><pre><code class="lang-python"><span class="hljs-comment"># &#x53EA;&#x8981;&#x4E2D;&#x95F4;&#x90A3;&#x4E2A;&#x6570;&#x5B57;</span>
+patt = <span class="hljs-string">&apos;-(\d+)-&apos;</span>
+m = re.search(patt, data)
+m.group()
+</code></pre>
+<pre><code>&apos;-6-&apos;
+</code></pre><pre><code class="lang-python">m.group(<span class="hljs-number">1</span>)
+</code></pre>
+<pre><code>&apos;6&apos;
+</code></pre><blockquote>
+<p>&#x53C2;&#x8003;&#x6587;&#x732E;&#xFF1A; &#x300A;Python&#x6838;&#x5FC3;&#x7F16;&#x7A0B;&#x7B2C;&#x4E09;&#x7248;&#x300B; &#x4EBA;&#x6C11;&#x90AE;&#x7535;&#x51FA;&#x7248;&#x793E;</p>
+</blockquote>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="./02-python3-core-programming.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 02 Python 3 Core Programming"><i class="fa fa-angle-left"></i></a>
+        
+        
+    </div>
+</div>
+
+        
+<script src="gitbook/app.js"></script>
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>
